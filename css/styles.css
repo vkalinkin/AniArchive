@@ -20,9 +20,19 @@
   color: #319e77;
 }
 
+.searchSelect {
+  max-width: 40%;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .mediumSelect {
   justify-content: space-around;
   align-items: center;
+}
+
+.seasonSearch {
+  margin-bottom: 90.44px;
 }
 
 .series50 {
@@ -53,4 +63,12 @@ button {
   color: white;
   width: 80px;
   height: 25px;
+}
+
+.termButton {
+  width: 100px;
+}
+
+.seasonButton {
+  width: 100px;
 }
