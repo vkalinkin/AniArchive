@@ -1,0 +1,32 @@
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.series50 {
+  width: 100%;
+}
+
+@media screen and (min-width: 514px) {
+  .series50 {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 746px) {
+  .series50 {
+    width: calc(100% / 3);
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .series50 {
+    width: 25%;
+  }
+}

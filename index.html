@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" crossorigin="anonymous"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
       integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
@@ -17,23 +19,38 @@
   </header>
   <main>
     <div class="container">
-      <div class="row">
+      <div class="teal">
         <h1>AniArchive</h1>
+      </div>
+      <div class = "teal">
+        <h4>ANIME AND MANGA DATABASE</h4>
       </div>
 
       <div class = "row user-input-area termSearch">
         <form>
-          <label for = "searchBox">Search Term</label>
-          <input type="text" id = "searchBox">
+          <div class="row mediumSelect">
+            <span><h3>Medium:</h3></span>
+            <span>
+              <input type="radio" name="medium" id="anime" value="a">
+              <label for="anime" class="teal">Anime</label>
+            </span>
 
-        <!-- <div class="buttonDiv">
-          <span class="searchButton">
-            <span>SEARCH!</span>
-          </span>
-        </div> -->
-          <span>
-            <button type="submit">SEARCH</button>
-          </span>
+            <span>
+              <input type="radio" name="medium" id="manga" value="m">
+              <label for="manga" class="teal">Manga</label>
+            </span>
+
+          </div>
+
+          <div class="row searchRow">
+            <label for="searchBox" class = "labelSearch">Enter Your Search Term:</label>
+            <input type="text" id="searchBox">
+
+            <span>
+              <button type="submit">SEARCH</button>
+            </span>
+          </div>
+
         </form>
 
       </div>

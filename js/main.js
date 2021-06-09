@@ -4,15 +4,18 @@ var $searchBox = document.querySelector('#searchBox');
 
 var $termSearch = document.querySelector('.termSearch');
 
+var $animeRadio = document.querySelector('#anime');
+var $mangaRadio = document.querySelector('#manga');
+
 var searchTerm = '';
 
-function xhrReq() {
+function xhrReqAnime() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
+
     var searchResults = xhr.response.results;
     for (var a = 0; a < searchResults.length; a++) {
       var seriesObj = {};
@@ -48,18 +51,57 @@ function xhrReq() {
   xhr.send();
 }
 
-// $searchButton.addEventListener('click', function (event) {
-//   $resultsList.replaceChildren();
-//   // event.preventDefault();
-//   searchTerm = $searchBox.value;
-//   // console.log('searchTerm:', searchTerm);
-//   xhrReq();
-// });
+function xhrReqManga() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/manga?q=' + searchTerm);
+  xhr.setRequestHeader('token', 'abc123');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+
+    var searchResults = xhr.response.results;
+    for (var a = 0; a < searchResults.length; a++) {
+      var seriesObj = {};
+      seriesObj = searchResults[a];
+      var $series50 = document.createElement('div');
+      $series50.className = 'div series50';
+
+      var showImage = document.createElement('img');
+      showImage.setAttribute('src', seriesObj.image_url);
+      $series50.appendChild(showImage);
+
+      var titleDiv = document.createElement('div');
+      titleDiv.textContent = seriesObj.title;
+      $series50.appendChild(titleDiv);
+
+      var typeDiv = document.createElement('div');
+      typeDiv.textContent = seriesObj.type;
+      $series50.appendChild(typeDiv);
+
+      var yearDiv = document.createElement('div');
+      var yearString = String(seriesObj.start_date);
+      yearString = yearString.slice(0, 4);
+      yearDiv.textContent = yearString;
+      $series50.appendChild(yearDiv);
+
+      var chaptersDiv = document.createElement('div');
+      chaptersDiv.textContent = 'Chapters: ' + seriesObj.chapters;
+      $series50.appendChild(chaptersDiv);
+
+      $resultsList.appendChild($series50);
+    }
+  });
+  xhr.send();
+}
 
 $termSearch.addEventListener('submit', function (event) {
   event.preventDefault();
   $resultsList.replaceChildren();
   searchTerm = $searchBox.value;
-  xhrReq();
-  // console.log('submit pressed!');
+
+  if ($animeRadio.checked === true) {
+    xhrReqAnime();
+  } else if ($mangaRadio.checked === true) {
+    xhrReqManga();
+  }
+
 });
