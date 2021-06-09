@@ -31,8 +31,14 @@
   align-items: center;
 }
 
+.pastOrPresent {
+  justify-content: space-around;
+  align-items: center;
+  min-width: 450px;
+}
+
 .seasonSearch {
-  margin-bottom: 90.44px;
+  /* margin-bottom: 90.44px; */
 }
 
 .series50 {
