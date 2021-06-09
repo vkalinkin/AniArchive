@@ -12,6 +12,11 @@ var $seasonButton = document.querySelector('.seasonButton');
 var $animeRadio = document.querySelector('#anime');
 var $mangaRadio = document.querySelector('#manga');
 
+var $pastOrPresent = document.querySelector('.pastOrPresent');
+var $latestRadio = document.querySelector('#latest');
+var $previousRadio = document.querySelector('#previous');
+var $dropDowns = document.querySelector('.dropDowns');
+
 var searchTerm = '';
 
 var season = '2021spring';
@@ -152,6 +157,14 @@ $termSearch.addEventListener('submit', function (event) {
     xhrReqAnime();
   } else if ($mangaRadio.checked === true) {
     xhrReqManga();
+  }
+});
+
+$pastOrPresent.addEventListener('click', function () {
+  if ($latestRadio.checked === true) {
+    $dropDowns.className = 'row dropDowns hidden';
+  } else if ($previousRadio.checked === true) {
+    $dropDowns.className = 'row dropDowns';
   }
 });
 
