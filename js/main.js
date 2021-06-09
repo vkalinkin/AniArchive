@@ -2,7 +2,12 @@ var $resultsList = document.querySelector('.resultsList');
 var $searchBox = document.querySelector('#searchBox');
 // var $searchButton = document.querySelector('.searchButton');
 
+var $searchSelect = document.querySelector('.searchSelect');
+var $seasonSearch = document.querySelector('.seasonSearch');
 var $termSearch = document.querySelector('.termSearch');
+
+var $termButton = document.querySelector('.termButton');
+var $seasonButton = document.querySelector('.seasonButton');
 
 var $animeRadio = document.querySelector('#anime');
 var $mangaRadio = document.querySelector('#manga');
@@ -104,4 +109,17 @@ $termSearch.addEventListener('submit', function (event) {
     xhrReqManga();
   }
 
+});
+
+$searchSelect.addEventListener('click', function (event) {
+  event.preventDefault();
+  if (event.target === $termButton) {
+    // console.log('term button clicked!');
+    $termSearch.className = 'row termSearch';
+    $seasonSearch.className = 'row seasonSearch hidden';
+  } else if (event.target === $seasonButton) {
+    // console.log('season button clicked!');
+    $termSearch.className = 'row termSearch hidden';
+    $seasonSearch.className = 'row seasonSearch';
+  }
 });

@@ -20,6 +20,12 @@
   color: #319e77;
 }
 
+.searchSelect {
+  max-width: 40%;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .mediumSelect {
   justify-content: space-around;
   align-items: center;

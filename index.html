@@ -26,7 +26,22 @@
         <h4>ANIME AND MANGA DATABASE</h4>
       </div>
 
-      <div class = "row user-input-area termSearch">
+
+      <div class="row searchSelect">
+        <span><h3>Search via:</h3></span>
+        <span><h3 class="termButton">TERM</h3></span>
+        <span><h3 class="seasonButton">SEASON</h3></span>
+      </div>
+
+
+      <div class="row seasonSearch hidden">
+        <form>
+          <button type="submit">SEARCH</button>
+        </form>
+      </div>
+
+
+      <div class = "row termSearch">
         <form>
           <div class="row mediumSelect">
             <span><h3>Medium:</h3></span>
@@ -39,21 +54,19 @@
               <input type="radio" name="medium" id="manga" value="m">
               <label for="manga" class="teal">Manga</label>
             </span>
-
           </div>
+
 
           <div class="row searchRow">
             <label for="searchBox" class = "labelSearch">Enter Your Search Term:</label>
             <input type="text" id="searchBox">
-
             <span>
               <button type="submit">SEARCH</button>
             </span>
           </div>
-
         </form>
-
       </div>
+
 
       <div class = "row resultsList">
       </div>
