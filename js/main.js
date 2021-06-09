@@ -1,6 +1,8 @@
 var $resultsList = document.querySelector('.resultsList');
 var $searchBox = document.querySelector('#searchBox');
-var $searchButton = document.querySelector('.searchButton');
+// var $searchButton = document.querySelector('.searchButton');
+
+var $termSearch = document.querySelector('.termSearch');
 
 var searchTerm = '';
 
@@ -46,10 +48,18 @@ function xhrReq() {
   xhr.send();
 }
 
-$searchButton.addEventListener('click', function (event) {
+// $searchButton.addEventListener('click', function (event) {
+//   $resultsList.replaceChildren();
+//   // event.preventDefault();
+//   searchTerm = $searchBox.value;
+//   // console.log('searchTerm:', searchTerm);
+//   xhrReq();
+// });
+
+$termSearch.addEventListener('submit', function (event) {
+  event.preventDefault();
   $resultsList.replaceChildren();
-  // event.preventDefault();
   searchTerm = $searchBox.value;
-  // console.log('searchTerm:', searchTerm);
   xhrReq();
+  // console.log('submit pressed!');
 });
