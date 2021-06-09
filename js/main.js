@@ -16,6 +16,8 @@ var $pastOrPresent = document.querySelector('.pastOrPresent');
 var $latestRadio = document.querySelector('#latest');
 var $previousRadio = document.querySelector('#previous');
 var $dropDowns = document.querySelector('.dropDowns');
+var $yearDropDown = document.querySelector('#yearDropDown');
+var $seasonDropDown = document.querySelector('#seasonDropDown');
 
 var searchTerm = '';
 
@@ -171,6 +173,14 @@ $pastOrPresent.addEventListener('click', function () {
 $seasonSearch.addEventListener('submit', function (event) {
   event.preventDefault();
   $resultsList.replaceChildren();
+  if ($latestRadio.checked === true) {
+    season = '2021spring';
+  } else if ($previousRadio.checked === true) {
+    var yr = $yearDropDown.value;
+    var sea = $seasonDropDown.value;
+    season = yr + sea;
+  }
+
   var year = season.slice(0, 4);
   // console.log('year:', year);
   var seas = season.slice(4);
