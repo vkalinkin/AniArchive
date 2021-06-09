@@ -31,6 +31,10 @@
   align-items: center;
 }
 
+.seasonSearch {
+  margin-bottom: 90.44px;
+}
+
 .series50 {
   margin-bottom: 40px;
 }
@@ -59,4 +63,12 @@ button {
   color: white;
   width: 80px;
   height: 25px;
+}
+
+.termButton {
+  width: 100px;
+}
+
+.seasonButton {
+  width: 100px;
 }
