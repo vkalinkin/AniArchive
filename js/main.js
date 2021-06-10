@@ -19,6 +19,8 @@ var $dropDowns = document.querySelector('.dropDowns');
 var $yearDropDown = document.querySelector('#yearDropDown');
 var $seasonDropDown = document.querySelector('#seasonDropDown');
 
+var $modal = document.querySelector('.modal');
+
 var searchTerm = '';
 
 var season = '2021spring';
@@ -129,7 +131,6 @@ function xhrReqManga() {
   xhr.send();
 }
 
-// https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/2021/spring
 function xhrReqSeason(year, seas) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
@@ -236,5 +237,22 @@ $searchSelect.addEventListener('click', function (event) {
     $seasonSearch.className = 'row seasonSearch';
     $termButton.className = 'termButton inactive';
     $seasonButton.className = 'seasonButton active';
+  }
+});
+
+$resultsList.addEventListener('click', function (event) {
+  // console.log('clicked!');
+  // console.log('event taget:', event.target);
+  // console.log('$moreInfoButtonSpan', $moreInfoButtonSpan);
+  // if (event.target === $moreInfoButtonSpan){
+  //   console.log('more info button pressed!');
+  // }
+  // if (event.target === $butDiv){
+  //   console.log('butDiv pressed!');
+  // }
+  if (event.target.className === 'moreInfoButton') {
+    // console.log('CLICKED!')
+    // console.log('target with class name of more Info button clicked!');
+    $modal.className = 'modal';
   }
 });
