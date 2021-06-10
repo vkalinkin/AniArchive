@@ -31,8 +31,10 @@
   align-items: center;
 }
 
-.seasonSearch {
-  margin-bottom: 90.44px;
+.pastOrPresent {
+  justify-content: space-around;
+  align-items: center;
+  min-width: 450px;
 }
 
 .series50 {
@@ -71,4 +73,18 @@ button {
 
 .seasonButton {
   width: 100px;
+}
+
+.seasonLast {
+  margin-bottom: 30px;
+}
+
+#seasonDropDown {
+  margin-right: 10px;
+  background-color: white;
+}
+
+#yearDropDown {
+  margin-right: 10px;
+  background-color: white;
 }

@@ -12,6 +12,13 @@ var $seasonButton = document.querySelector('.seasonButton');
 var $animeRadio = document.querySelector('#anime');
 var $mangaRadio = document.querySelector('#manga');
 
+var $pastOrPresent = document.querySelector('.pastOrPresent');
+var $latestRadio = document.querySelector('#latest');
+var $previousRadio = document.querySelector('#previous');
+var $dropDowns = document.querySelector('.dropDowns');
+var $yearDropDown = document.querySelector('#yearDropDown');
+var $seasonDropDown = document.querySelector('#seasonDropDown');
+
 var searchTerm = '';
 
 var season = '2021spring';
@@ -155,9 +162,25 @@ $termSearch.addEventListener('submit', function (event) {
   }
 });
 
+$pastOrPresent.addEventListener('click', function () {
+  if ($latestRadio.checked === true) {
+    $dropDowns.className = 'row dropDowns hidden';
+  } else if ($previousRadio.checked === true) {
+    $dropDowns.className = 'row dropDowns';
+  }
+});
+
 $seasonSearch.addEventListener('submit', function (event) {
   event.preventDefault();
   $resultsList.replaceChildren();
+  if ($latestRadio.checked === true) {
+    season = '2021spring';
+  } else if ($previousRadio.checked === true) {
+    var yr = $yearDropDown.value;
+    var sea = $seasonDropDown.value;
+    season = yr + sea;
+  }
+
   var year = season.slice(0, 4);
   // console.log('year:', year);
   var seas = season.slice(4);
