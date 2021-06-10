@@ -265,6 +265,15 @@ function xhrReqIDAnime(id) {
     synopDiv.textContent = 'Synopsis: ' + currentAnime.synopsis;
     $modalContent.appendChild(synopDiv);
 
+    var modalBut = document.createElement('div');
+
+    var modalOkButtonSpan = document.createElement('span');
+    modalOkButtonSpan.textContent = 'OK';
+    modalOkButtonSpan.className = 'modalOkButton';
+    modalBut.appendChild(modalOkButtonSpan);
+
+    $modalContent.appendChild(modalBut);
+
   });
   xhr.send();
 }
@@ -349,6 +358,7 @@ $resultsList.addEventListener('click', function (event) {
   if (event.target.className === 'moreInfoButton') {
     // console.log('CLICKED!')
     // console.log('target with class name of more Info button clicked!');
+    $modalContent.replaceChildren();
     $modal.className = 'modal';
     var currentMedium = event.target.getAttribute('medium');
     var currentId = event.target.getAttribute('id');
@@ -359,5 +369,12 @@ $resultsList.addEventListener('click', function (event) {
       xhrReqIDManga(currentId);
     }
 
+  }
+});
+
+$modalContent.addEventListener('click', function (event) {
+  if (event.target.className === 'modalOkButton') {
+    // console.log('modal ok button pressed!');
+    $modal.className = 'modal hidden';
   }
 });
