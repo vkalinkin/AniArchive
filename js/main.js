@@ -68,7 +68,7 @@ function xhrReqAnime() {
       var moreInfoButtonSpan = document.createElement('span');
       moreInfoButtonSpan.textContent = 'More Info';
       moreInfoButtonSpan.className = 'moreInfoButton';
-      moreInfoButtonSpan.setAttribute('malID', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
       moreInfoButtonSpan.setAttribute('medium', 'anime');
       butDiv.appendChild(moreInfoButtonSpan);
 
@@ -121,7 +121,7 @@ function xhrReqManga() {
       var moreInfoButtonSpan = document.createElement('span');
       moreInfoButtonSpan.textContent = 'More Info';
       moreInfoButtonSpan.className = 'moreInfoButton';
-      moreInfoButtonSpan.setAttribute('malID', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
       moreInfoButtonSpan.setAttribute('medium', 'manga');
       butDiv.appendChild(moreInfoButtonSpan);
 
@@ -174,12 +174,34 @@ function xhrReqSeason(year, seas) {
       var moreInfoButtonSpan = document.createElement('span');
       moreInfoButtonSpan.textContent = 'More Info';
       moreInfoButtonSpan.className = 'moreInfoButton';
-      moreInfoButtonSpan.setAttribute('malID', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
       moreInfoButtonSpan.setAttribute('medium', 'anime');
       butDiv.appendChild(moreInfoButtonSpan);
 
       $resultsList.appendChild($series50);
     }
+  });
+  xhr.send();
+}
+
+function xhrReqIDAnime(id) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/anime/' + id);
+  xhr.setRequestHeader('token', 'abc123');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
+  });
+  xhr.send();
+}
+
+function xhrReqIDManga(id) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/manga/' + id);
+  xhr.setRequestHeader('token', 'abc123');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
   });
   xhr.send();
 }
@@ -254,5 +276,14 @@ $resultsList.addEventListener('click', function (event) {
     // console.log('CLICKED!')
     // console.log('target with class name of more Info button clicked!');
     $modal.className = 'modal';
+    var currentMedium = event.target.getAttribute('medium');
+    var currentId = event.target.getAttribute('id');
+    // console.log('current id:', currentId);
+    if (currentMedium === 'anime') {
+      xhrReqIDAnime(currentId);
+    } else if (currentMedium === 'manga') {
+      xhrReqIDManga(currentId);
+    }
+
   }
 });
