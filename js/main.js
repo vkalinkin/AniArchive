@@ -20,9 +20,9 @@ var $yearDropDown = document.querySelector('#yearDropDown');
 var $seasonDropDown = document.querySelector('#seasonDropDown');
 
 var $modal = document.querySelector('.modal');
+var $modalContent = document.querySelector('.modalContent');
 
 var searchTerm = '';
-
 var season = '2021spring';
 
 function xhrReqAnime() {
@@ -191,6 +191,80 @@ function xhrReqIDAnime(id) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     // console.log(xhr.response);
+    var currentAnime = xhr.response;
+    // console.log('currentAnime', currentAnime);
+
+    var modalTopDiv = document.createElement('div');
+    modalTopDiv.className = 'modalTop row';
+
+    var imgSpan = document.createElement('span');
+    modalTopDiv.appendChild(imgSpan);
+
+    var modalImg = document.createElement('img');
+    modalImg.setAttribute('src', currentAnime.image_url);
+    imgSpan.appendChild(modalImg);
+
+    var textSpan = document.createElement('span');
+    modalTopDiv.appendChild(textSpan);
+
+    var titleDiv = document.createElement('div');
+    titleDiv.textContent = currentAnime.title;
+    textSpan.appendChild(titleDiv);
+
+    var titleEngDiv = document.createElement('div');
+    titleEngDiv.textContent = currentAnime.title_english;
+    textSpan.appendChild(titleEngDiv);
+
+    var yearDiv = document.createElement('div');
+    var airTimes = currentAnime.aired.from;
+    var year = airTimes.slice(0, 4);
+    yearDiv.textContent = year;
+    textSpan.appendChild(yearDiv);
+
+    var typeDiv = document.createElement('div');
+    typeDiv.textContent = currentAnime.type;
+    textSpan.appendChild(typeDiv);
+
+    var episodesDiv = document.createElement('div');
+    episodesDiv.textContent = 'Episodes: ' + currentAnime.episodes;
+    textSpan.appendChild(episodesDiv);
+
+    var durationDiv = document.createElement('div');
+    durationDiv.textContent = currentAnime.duration;
+    textSpan.appendChild(durationDiv);
+
+    var sourceDiv = document.createElement('div');
+    sourceDiv.textContent = 'Source: ' + currentAnime.source;
+    textSpan.appendChild(sourceDiv);
+
+    var ratingDiv = document.createElement('div');
+    ratingDiv.textContent = currentAnime.rating;
+    textSpan.appendChild(ratingDiv);
+
+    var studiosDiv = document.createElement('div');
+    var currentStudios = currentAnime.studios;
+    studiosDiv.textContent = 'Studio(s): ';
+    for (var b = 0; b < currentStudios.length; b++) {
+      var curStudio = currentStudios[b];
+      studiosDiv.textContent += curStudio.name + ' ';
+    }
+    textSpan.appendChild(studiosDiv);
+
+    $modalContent.appendChild(modalTopDiv);
+
+    var genresDiv = document.createElement('div');
+    var currentGenres = currentAnime.genres;
+    genresDiv.textContent = 'Genre(s): ';
+    for (var a = 0; a < currentGenres.length; a++) {
+      var curGenre = currentGenres[a];
+      genresDiv.textContent += curGenre.name + ' ';
+    }
+    $modalContent.appendChild(genresDiv);
+
+    var synopDiv = document.createElement('div');
+    synopDiv.textContent = 'Synopsis: ' + currentAnime.synopsis;
+    $modalContent.appendChild(synopDiv);
+
   });
   xhr.send();
 }
