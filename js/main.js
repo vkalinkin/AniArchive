@@ -35,7 +35,7 @@ function xhrReqAnime() {
       var seriesObj = {};
       seriesObj = searchResults[a];
       var $series50 = document.createElement('div');
-      $series50.className = 'div series50';
+      $series50.className = 'series50';
 
       var showImage = document.createElement('img');
       showImage.setAttribute('src', seriesObj.image_url);
@@ -58,6 +58,17 @@ function xhrReqAnime() {
       var episodesDiv = document.createElement('div');
       episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
       $series50.appendChild(episodesDiv);
+
+      var butDiv = document.createElement('div');
+      butDiv.className = 'butDiv';
+      $series50.appendChild(butDiv);
+
+      var moreInfoButtonSpan = document.createElement('span');
+      moreInfoButtonSpan.textContent = 'More Info';
+      moreInfoButtonSpan.className = 'moreInfoButton';
+      moreInfoButtonSpan.setAttribute('malID', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('medium', 'anime');
+      butDiv.appendChild(moreInfoButtonSpan);
 
       $resultsList.appendChild($series50);
     }
@@ -101,6 +112,17 @@ function xhrReqManga() {
       chaptersDiv.textContent = 'Chapters: ' + seriesObj.chapters;
       $series50.appendChild(chaptersDiv);
 
+      var butDiv = document.createElement('div');
+      butDiv.className = 'butDiv';
+      $series50.appendChild(butDiv);
+
+      var moreInfoButtonSpan = document.createElement('span');
+      moreInfoButtonSpan.textContent = 'More Info';
+      moreInfoButtonSpan.className = 'moreInfoButton';
+      moreInfoButtonSpan.setAttribute('malID', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('medium', 'manga');
+      butDiv.appendChild(moreInfoButtonSpan);
+
       $resultsList.appendChild($series50);
     }
   });
@@ -143,6 +165,17 @@ function xhrReqSeason(year, seas) {
       var episodesDiv = document.createElement('div');
       episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
       $series50.appendChild(episodesDiv);
+
+      var butDiv = document.createElement('div');
+      butDiv.className = 'butDiv';
+      $series50.appendChild(butDiv);
+
+      var moreInfoButtonSpan = document.createElement('span');
+      moreInfoButtonSpan.textContent = 'More Info';
+      moreInfoButtonSpan.className = 'moreInfoButton';
+      moreInfoButtonSpan.setAttribute('malID', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('medium', 'anime');
+      butDiv.appendChild(moreInfoButtonSpan);
 
       $resultsList.appendChild($series50);
     }

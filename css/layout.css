@@ -42,12 +42,25 @@
   text-align: center;
 }
 
+/* .divSpan {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  text-align: center;
+} */
+.butDiv {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100px;
+}
+
 .active {
   background-color: #319e77;
   border-radius: 5px;
   border: none;
   color: white;
-  width: 80px;
+  width: 120px;
   height: 25px;
 }
 
