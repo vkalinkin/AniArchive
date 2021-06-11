@@ -24,6 +24,9 @@ var $seasonDropDown = document.querySelector('#seasonDropDown');
 var $modal = document.querySelector('.modal');
 var $modalContent = document.querySelector('.modalContent');
 
+var $myList = document.querySelector('.myList');
+var $searches = document.querySelector('.searches');
+
 var searchTerm = '';
 var season = '2021spring';
 
@@ -81,6 +84,7 @@ function xhrReqAnime() {
       iStar.setAttribute('year', yearString);
       iStar.setAttribute('episodes', seriesObj.episodes);
       iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
       butDiv.appendChild(iStar);
       // <i class="far fa-star"></i>
 
@@ -144,6 +148,8 @@ function xhrReqManga() {
       iStar.setAttribute('year', yearString);
       iStar.setAttribute('chapters', seriesObj.chapters);
       iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
+
       butDiv.appendChild(iStar);
 
       $resultsList.appendChild($series50);
@@ -206,6 +212,7 @@ function xhrReqSeason(year, seas) {
       iStar.setAttribute('year', yearString);
       iStar.setAttribute('episodes', seriesObj.episodes);
       iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
       butDiv.appendChild(iStar);
 
       $resultsList.appendChild($series50);
@@ -529,6 +536,7 @@ $resultsList.addEventListener('click', function (event) {
     newFave.id = event.target.getAttribute('id');
     newFave.title = event.target.getAttribute('title');
     newFave.year = event.target.getAttribute('year');
+    newFave.img = event.target.getAttribute('img');
     // var chapters = event.target.getAttribute('chapters');
     if (newFave.type === 'Manga' || newFave.type === 'Light Novel') {
       newFave.chapters = event.target.getAttribute('chapters');
@@ -550,4 +558,91 @@ $modalContent.addEventListener('click', function (event) {
   if (event.target.className === 'modalOkButton') {
     $modal.className = 'modal hidden';
   }
+});
+
+$myList.addEventListener('click', function (event) {
+  $searches.className = 'row searches hidden';
+
+  for (var a = 0; a < data.faves.length; a++) {
+    var seriesObj = {};
+    seriesObj = data.faves[a];
+    var $series50 = document.createElement('div');
+    $series50.className = 'div series50';
+
+    var showImage = document.createElement('img');
+    showImage.setAttribute('src', seriesObj.img);
+    $series50.appendChild(showImage);
+
+    // var showImage = document.createElement('img');
+    // showImage.setAttribute('src', seriesObj.image_url);
+    // $series50.appendChild(showImage);
+
+    var titleDiv = document.createElement('div');
+    titleDiv.textContent = seriesObj.title;
+    $series50.appendChild(titleDiv);
+
+    var typeDiv = document.createElement('div');
+    typeDiv.textContent = seriesObj.type;
+    $series50.appendChild(typeDiv);
+
+    var yearDiv = document.createElement('div');
+    yearDiv.textContent = seriesObj.year;
+    $series50.appendChild(yearDiv);
+
+    var episodesDiv = document.createElement('div');
+    episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
+    $series50.appendChild(episodesDiv);
+
+    var butDiv = document.createElement('div');
+    butDiv.className = 'butDiv';
+    $series50.appendChild(butDiv);
+
+    var moreInfoButtonSpan = document.createElement('span');
+    moreInfoButtonSpan.textContent = 'More Info';
+    moreInfoButtonSpan.className = 'moreInfoButton';
+    moreInfoButtonSpan.setAttribute('id', seriesObj.id);
+    // fix v
+    moreInfoButtonSpan.setAttribute('medium', 'anime');
+    butDiv.appendChild(moreInfoButtonSpan);
+
+    $resultsList.appendChild($series50);
+
+    // var showImage = document.createElement('img');
+    // showImage.setAttribute('src', seriesObj.image_url);
+    // $series50.appendChild(showImage);
+
+    // var titleDiv = document.createElement('div');
+    // titleDiv.textContent = seriesObj.title;
+    // $series50.appendChild(titleDiv);
+
+    // var typeDiv = document.createElement('div');
+    // typeDiv.textContent = seriesObj.type;
+    // $series50.appendChild(typeDiv);
+
+    // var yearDiv = document.createElement('div');
+    // var yearString = String(seriesObj.airing_start);
+    // yearString = yearString.slice(0, 4);
+    // yearDiv.textContent = yearString;
+    // $series50.appendChild(yearDiv);
+
+    // var episodesDiv = document.createElement('div');
+    // episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
+    // $series50.appendChild(episodesDiv);
+
+    // var butDiv = document.createElement('div');
+    // butDiv.className = 'butDiv';
+    // $series50.appendChild(butDiv);
+
+    // var moreInfoButtonSpan = document.createElement('span');
+    // moreInfoButtonSpan.textContent = 'More Info';
+    // moreInfoButtonSpan.className = 'moreInfoButton';
+    // moreInfoButtonSpan.setAttribute('id', seriesObj.id);
+    // moreInfoButtonSpan.setAttribute('medium', 'anime');
+    // butDiv.appendChild(moreInfoButtonSpan);
+
+    // modalData.appendChild(modalTopDiv);
+
+    // $modalContent.appendChild(modalTopDiv);
+  }
+
 });
