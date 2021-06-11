@@ -87,7 +87,10 @@
 .modalContent {
   /* background-color: white; */
   position: fixed;
-  top: 100px;
-  height: 200px;
-  width: 600px;
+  top: 20px;
+
+  /* height: 200px; */
+  width: 95%;
+  padding: 12px;
+  border-radius: 10px;
 }
