@@ -273,7 +273,6 @@ function xhrReqIDAnime(id) {
     modalBut.appendChild(modalOkButtonSpan);
 
     $modalContent.appendChild(modalBut);
-
   });
   xhr.send();
 }
@@ -285,6 +284,112 @@ function xhrReqIDManga(id) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     // console.log(xhr.response);
+
+    var currentManga = xhr.response;
+
+    var modalTopDiv = document.createElement('div');
+    modalTopDiv.className = 'modalTop row';
+
+    var imgSpan = document.createElement('span');
+    modalTopDiv.appendChild(imgSpan);
+
+    var modalImg = document.createElement('img');
+    modalImg.setAttribute('src', currentManga.image_url);
+    imgSpan.appendChild(modalImg);
+
+    var textSpan = document.createElement('span');
+    modalTopDiv.appendChild(textSpan);
+
+    var titleDiv = document.createElement('div');
+    titleDiv.textContent = currentManga.title;
+    textSpan.appendChild(titleDiv);
+
+    var titleEngDiv = document.createElement('div');
+    titleEngDiv.textContent = currentManga.title_english;
+    textSpan.appendChild(titleEngDiv);
+
+    var yearDiv = document.createElement('div');
+    var pub = currentManga.published;
+    // console.log('pub', pub);
+    var fromPub = pub.from;
+    // console.log('fromPub:', fromPub);
+    var year = fromPub.slice(0, 4);
+    yearDiv.textContent = year;
+    textSpan.appendChild(yearDiv);
+
+    var typeDiv = document.createElement('div');
+    typeDiv.textContent = currentManga.type;
+    textSpan.appendChild(typeDiv);
+
+    var chaptersDiv = document.createElement('div');
+    chaptersDiv.textContent = 'Chapters: ' + currentManga.chapters;
+    textSpan.appendChild(chaptersDiv);
+
+    // var durationDiv = document.createElement('div');
+    // durationDiv.textContent = currentAnime.duration;
+    // textSpan.appendChild(durationDiv);
+
+    // var sourceDiv = document.createElement('div');
+    // sourceDiv.textContent = 'Source: ' + currentAnime.source;
+    // textSpan.appendChild(sourceDiv);
+
+    // var ratingDiv = document.createElement('div');
+    // ratingDiv.textContent = currentAnime.rating;
+    // textSpan.appendChild(ratingDiv);
+
+    // var studiosDiv = document.createElement('div');
+    // var currentStudios = currentAnime.studios;
+    // studiosDiv.textContent = 'Studio(s): ';
+    // for (var b = 0; b < currentStudios.length; b++) {
+    //   var curStudio = currentStudios[b];
+    //   studiosDiv.textContent += curStudio.name + ' ';
+    // }
+    // textSpan.appendChild(studiosDiv);
+    var authorDiv = document.createElement('div');
+    var currentAuthors = currentManga.authors;
+    // console.log('currentAuthors:', currentAuthors);
+    authorDiv.textContent = 'Author(s): ';
+    for (var b = 0; b < currentAuthors.length; b++) {
+      // console.log('curAuthor:', curAuthor);
+      var curAuthor = currentAuthors[b];
+      var author = curAuthor.name;
+      authorDiv.textContent += author + ' ';
+    }
+    textSpan.appendChild(authorDiv);
+
+    var serialDiv = document.createElement('div');
+    var currentSerial = currentManga.serializations;
+    serialDiv.textContent = 'Serialization(s): ';
+    for (var c = 0; c < currentSerial.length; c++) {
+      var serial = currentSerial[c].name;
+      serialDiv.textContent += serial + ' ';
+    }
+    textSpan.appendChild(serialDiv);
+
+    $modalContent.appendChild(modalTopDiv);
+
+    var genresDiv = document.createElement('div');
+    var currentGenres = currentManga.genres;
+    genresDiv.textContent = 'Genre(s): ';
+    for (var a = 0; a < currentGenres.length; a++) {
+      var curGenre = currentGenres[a];
+      genresDiv.textContent += curGenre.name + ' ';
+    }
+    $modalContent.appendChild(genresDiv);
+
+    var synopDiv = document.createElement('div');
+    synopDiv.textContent = 'Synopsis: ' + currentManga.synopsis;
+    $modalContent.appendChild(synopDiv);
+
+    var modalBut = document.createElement('div');
+
+    var modalOkButtonSpan = document.createElement('span');
+    modalOkButtonSpan.textContent = 'OK';
+    modalOkButtonSpan.className = 'modalOkButton';
+    modalBut.appendChild(modalOkButtonSpan);
+
+    $modalContent.appendChild(modalBut);
+
   });
   xhr.send();
 }
