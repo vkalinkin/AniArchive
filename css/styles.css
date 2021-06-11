@@ -41,6 +41,17 @@
   margin-bottom: 40px;
 }
 
+.moreInfoButton {
+  background-color: #319e77;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  width: 100px;
+
+  /* width: 80px;
+  height: 25px; */
+}
+
 label {
   font-weight: bold;
 }
@@ -87,4 +98,54 @@ button {
 #yearDropDown {
   margin-right: 10px;
   background-color: white;
+}
+
+.textSpan {
+  padding-left: 10px;
+}
+
+.infoImg {
+  /* margin-right: 10px; */
+  width: 80px;
+}
+
+.infoRow {
+  margin-bottom: 8px;
+
+  /* max-width: 320px; */
+}
+
+.synop {
+  max-height: 100px;
+  overflow: auto;
+}
+
+@media screen and (min-width: 514px) {
+  .synop {
+    max-height: 350px;
+    overflow: auto;
+  }
+}
+
+@media screen and (min-width: 514px) {
+  .infoImg {
+    width: 100%;
+
+    /* margin-right: 10px; */
+  }
+}
+
+.modalBut {
+  display: flex;
+  justify-content: center;
+}
+
+.modalOkButton {
+  background-color: #319e77;
+  border-radius: 5px;
+  border: none;
+  color: white;
+
+  /* width: 60px; */
+  padding: 5px 15px;
 }

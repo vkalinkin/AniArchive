@@ -42,12 +42,25 @@
   text-align: center;
 }
 
+/* .divSpan {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  text-align: center;
+} */
+.butDiv {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100px;
+}
+
 .active {
   background-color: #319e77;
   border-radius: 5px;
   border: none;
   color: white;
-  width: 80px;
+  width: 120px;
   height: 25px;
 }
 
@@ -58,4 +71,26 @@
   color: black;
   width: 80px;
   height: 25px;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.modalContent {
+  /* background-color: white; */
+  position: fixed;
+  top: 20px;
+
+  /* height: 200px; */
+  width: 95%;
+  padding: 12px;
+  border-radius: 10px;
 }
