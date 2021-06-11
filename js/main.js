@@ -601,8 +601,14 @@ $myList.addEventListener('click', function (event) {
     moreInfoButtonSpan.textContent = 'More Info';
     moreInfoButtonSpan.className = 'moreInfoButton';
     moreInfoButtonSpan.setAttribute('id', seriesObj.id);
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel') {
+      moreInfoButtonSpan.setAttribute('medium', 'manga');
+    } else {
+      moreInfoButtonSpan.setAttribute('medium', 'anime');
+    }
     // fix v
-    moreInfoButtonSpan.setAttribute('medium', 'anime');
+
     butDiv.appendChild(moreInfoButtonSpan);
 
     $resultsList.appendChild($series50);
