@@ -25,6 +25,7 @@ var $modal = document.querySelector('.modal');
 var $modalContent = document.querySelector('.modalContent');
 
 var $myList = document.querySelector('.myList');
+var $goSearchBut = document.querySelector('.goSearchBut');
 var $searches = document.querySelector('.searches');
 
 var searchTerm = '';
@@ -562,6 +563,7 @@ $modalContent.addEventListener('click', function (event) {
 
 $myList.addEventListener('click', function (event) {
   $searches.className = 'row searches hidden';
+  $resultsList.replaceChildren();
 
   for (var a = 0; a < data.faves.length; a++) {
     var seriesObj = {};
@@ -612,43 +614,9 @@ $myList.addEventListener('click', function (event) {
     butDiv.appendChild(moreInfoButtonSpan);
 
     $resultsList.appendChild($series50);
-
-    // var showImage = document.createElement('img');
-    // showImage.setAttribute('src', seriesObj.image_url);
-    // $series50.appendChild(showImage);
-
-    // var titleDiv = document.createElement('div');
-    // titleDiv.textContent = seriesObj.title;
-    // $series50.appendChild(titleDiv);
-
-    // var typeDiv = document.createElement('div');
-    // typeDiv.textContent = seriesObj.type;
-    // $series50.appendChild(typeDiv);
-
-    // var yearDiv = document.createElement('div');
-    // var yearString = String(seriesObj.airing_start);
-    // yearString = yearString.slice(0, 4);
-    // yearDiv.textContent = yearString;
-    // $series50.appendChild(yearDiv);
-
-    // var episodesDiv = document.createElement('div');
-    // episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
-    // $series50.appendChild(episodesDiv);
-
-    // var butDiv = document.createElement('div');
-    // butDiv.className = 'butDiv';
-    // $series50.appendChild(butDiv);
-
-    // var moreInfoButtonSpan = document.createElement('span');
-    // moreInfoButtonSpan.textContent = 'More Info';
-    // moreInfoButtonSpan.className = 'moreInfoButton';
-    // moreInfoButtonSpan.setAttribute('id', seriesObj.id);
-    // moreInfoButtonSpan.setAttribute('medium', 'anime');
-    // butDiv.appendChild(moreInfoButtonSpan);
-
-    // modalData.appendChild(modalTopDiv);
-
-    // $modalContent.appendChild(modalTopDiv);
   }
+});
 
+$goSearchBut.addEventListener('click', function (event) {
+  $searches.className = 'row searches';
 });
