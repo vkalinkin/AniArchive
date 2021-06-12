@@ -2,6 +2,8 @@
 var data = {
   // view: 'entry-form',
   faves: [],
+  mangaIDs: [],
+  animeIDs: [],
   // editing: null,
   nextEntryId: 1
 };
