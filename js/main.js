@@ -2,7 +2,6 @@
 /* exported data */
 var $resultsList = document.querySelector('.resultsList');
 var $searchBox = document.querySelector('#searchBox');
-// var $searchButton = document.querySelector('.searchButton');
 
 var $searchSelect = document.querySelector('.searchSelect');
 var $seasonSearch = document.querySelector('.seasonSearch');
@@ -87,7 +86,6 @@ function xhrReqAnime() {
         var currentCheckAgainst = data.animeIDs[b];
 
         if (currentId === currentCheckAgainst) {
-          // alreadyInFaves = true;
           iStar.className = 'fas fa-star';
 
           break;
@@ -100,20 +98,7 @@ function xhrReqAnime() {
       iStar.setAttribute('id', seriesObj.mal_id);
       iStar.setAttribute('img', seriesObj.image_url);
 
-      // if (alreadyInFaves === true) {
-      //   iStar.className = 'fas fa-star';
-      // } else {
-      //   iStar.className = 'far fa-star';
-      //   iStar.setAttribute('title', seriesObj.title);
-      //   iStar.setAttribute('type', seriesObj.type);
-      //   iStar.setAttribute('year', yearString);
-      //   iStar.setAttribute('episodes', seriesObj.episodes);
-      //   iStar.setAttribute('id', seriesObj.mal_id);
-      //   iStar.setAttribute('img', seriesObj.image_url);
-      // }
-
       butDiv.appendChild(iStar);
-      // <i class="far fa-star"></i>
 
       $resultsList.appendChild($series50);
     }
@@ -171,18 +156,15 @@ function xhrReqManga() {
       var iStar = document.createElement('i');
       iStar.className = 'far fa-star';
       var currentId = seriesObj.mal_id.toString();
-      // console.log('currentId', currentId);
-      // console.log('currentId is integer?', Number.isInteger(currentId));
+
       for (var b = 0; b < data.mangaIDs.length; b++) {
         var currentCheckAgainst = data.mangaIDs[b];
-        // console.log('current check against', currentCheckAgainst);
-        // console.log('current check against is integer?', Number.isInteger(currentCheckAgainst));
+
         if (currentId === currentCheckAgainst) {
           iStar.className = 'fas fa-star';
           break;
         }
       }
-      // iStar.className = 'far fa-star';
       iStar.setAttribute('title', seriesObj.title);
       iStar.setAttribute('type', seriesObj.type);
       iStar.setAttribute('year', yearString);
@@ -255,7 +237,6 @@ function xhrReqSeason(year, seas) {
           break;
         }
       }
-      // iStar.className = 'far fa-star';
       iStar.setAttribute('title', seriesObj.title);
       iStar.setAttribute('type', seriesObj.type);
       iStar.setAttribute('year', yearString);
@@ -557,7 +538,6 @@ $searchSelect.addEventListener('click', function (event) {
 $resultsList.addEventListener('click', function (event) {
 
   if (event.target.className === 'moreInfoButton') {
-    // console.log('more info button clicked');
     $modalContent.replaceChildren();
     $modal.className = 'modal';
     var currentMedium = event.target.getAttribute('medium');
@@ -575,7 +555,7 @@ $resultsList.addEventListener('click', function (event) {
     newFave.title = event.target.getAttribute('title');
     newFave.year = event.target.getAttribute('year');
     newFave.img = event.target.getAttribute('img');
-    // var chapters = event.target.getAttribute('chapters');
+
     if (newFave.type === 'Manga' || newFave.type === 'Light Novel' || newFave.type === 'One-shot' || newFave.type === 'Manhwa' ||
     newFave.type === 'Manhua' || newFave.type === 'Doujinshi' || newFave.type === 'Novel') {
       newFave.chapters = event.target.getAttribute('chapters');
@@ -584,11 +564,6 @@ $resultsList.addEventListener('click', function (event) {
       newFave.episodes = event.target.getAttribute('episodes');
       data.animeIDs.push(event.target.getAttribute('id'));
     }
-    // if (episodes !== null){
-    //   newFave.episodes = event.target.getAttribute('episodes');
-    // } else {
-    //   newFave.chapters = event.target.getAttribute('chapters');
-    // }
 
     data.faves.push(newFave);
 
@@ -615,10 +590,6 @@ $myList.addEventListener('click', function (event) {
     var showImage = document.createElement('img');
     showImage.setAttribute('src', seriesObj.img);
     $series50.appendChild(showImage);
-
-    // var showImage = document.createElement('img');
-    // showImage.setAttribute('src', seriesObj.image_url);
-    // $series50.appendChild(showImage);
 
     var titleDiv = document.createElement('div');
     titleDiv.textContent = seriesObj.title;
@@ -658,14 +629,18 @@ $myList.addEventListener('click', function (event) {
     } else {
       moreInfoButtonSpan.setAttribute('medium', 'anime');
     }
-    // fix v
 
     butDiv.appendChild(moreInfoButtonSpan);
 
     $resultsList.appendChild($series50);
+
+    $myList.className = 'myList active';
+    $goSearchBut.className = 'goSearchBut inactive';
   }
 });
 
 $goSearchBut.addEventListener('click', function (event) {
   $searches.className = 'row searches';
+  $myList.className = 'myList inactive';
+  $goSearchBut.className = 'goSearchBut active';
 });

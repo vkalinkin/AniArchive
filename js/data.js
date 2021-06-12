@@ -1,11 +1,8 @@
 /* exported data */
 var data = {
-  // view: 'entry-form',
   faves: [],
   mangaIDs: [],
-  animeIDs: [],
-  // editing: null,
-  nextEntryId: 1
+  animeIDs: []
 };
 
 var previousEntries = localStorage.getItem('javascript-local-storage');
