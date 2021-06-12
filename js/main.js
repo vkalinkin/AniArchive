@@ -171,19 +171,18 @@ function xhrReqManga() {
       var iStar = document.createElement('i');
       iStar.className = 'far fa-star';
       var currentId = seriesObj.mal_id.toString();
-      // var alreadyInFaves = false;
-
+      // console.log('currentId', currentId);
+      // console.log('currentId is integer?', Number.isInteger(currentId));
       for (var b = 0; b < data.mangaIDs.length; b++) {
         var currentCheckAgainst = data.mangaIDs[b];
-
+        // console.log('current check against', currentCheckAgainst);
+        // console.log('current check against is integer?', Number.isInteger(currentCheckAgainst));
         if (currentId === currentCheckAgainst) {
-          // alreadyInFaves = true;
           iStar.className = 'fas fa-star';
-
           break;
         }
       }
-      iStar.className = 'far fa-star';
+      // iStar.className = 'far fa-star';
       iStar.setAttribute('title', seriesObj.title);
       iStar.setAttribute('type', seriesObj.type);
       iStar.setAttribute('year', yearString);
@@ -249,19 +248,14 @@ function xhrReqSeason(year, seas) {
       var iStar = document.createElement('i');
       iStar.className = 'far fa-star';
       var currentId = seriesObj.mal_id.toString();
-      // var alreadyInFaves = false;
-
       for (var b = 0; b < data.animeIDs.length; b++) {
         var currentCheckAgainst = data.animeIDs[b];
-
         if (currentId === currentCheckAgainst) {
-          // alreadyInFaves = true;
           iStar.className = 'fas fa-star';
-
           break;
         }
       }
-      iStar.className = 'far fa-star';
+      // iStar.className = 'far fa-star';
       iStar.setAttribute('title', seriesObj.title);
       iStar.setAttribute('type', seriesObj.type);
       iStar.setAttribute('year', yearString);
