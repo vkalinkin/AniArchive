@@ -954,3 +954,5 @@ $goSearchBut.addEventListener('click', function (event) {
   $myList.className = 'myList inactive';
   $goSearchBut.className = 'goSearchBut active';
 });
+
+// gsap.from($resultsList, {duration: 2, opacity: 0, y: 300, stagger: 0.25});

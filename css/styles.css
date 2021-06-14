@@ -43,6 +43,51 @@
   min-width: 450px;
 }
 
+/* input > .radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  transition: 0.2s all linear;
+}
+
+input > .radio:checked {
+  border: 6px solid black;
+} */
+
+/* .mediumSelect > input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  transition: 0.2s all linear;
+}
+
+.mediumSelect > input:checked {
+  border: 6px solid black;
+} */
+
+/* input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  transition: 0.2s all linear;
+}
+
+input:checked {
+  border: 6px solid black;
+} */
+
 .series50 {
   margin-bottom: 40px;
 }
