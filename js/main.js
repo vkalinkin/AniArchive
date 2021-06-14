@@ -1,6 +1,7 @@
+/* global data */
+/* exported data */
 var $resultsList = document.querySelector('.resultsList');
 var $searchBox = document.querySelector('#searchBox');
-// var $searchButton = document.querySelector('.searchButton');
 
 var $searchSelect = document.querySelector('.searchSelect');
 var $seasonSearch = document.querySelector('.seasonSearch');
@@ -21,6 +22,10 @@ var $seasonDropDown = document.querySelector('#seasonDropDown');
 
 var $modal = document.querySelector('.modal');
 var $modalContent = document.querySelector('.modalContent');
+
+var $myList = document.querySelector('.myList');
+var $goSearchBut = document.querySelector('.goSearchBut');
+var $searches = document.querySelector('.searches');
 
 var searchTerm = '';
 var season = '2021spring';
@@ -71,6 +76,29 @@ function xhrReqAnime() {
       moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
       moreInfoButtonSpan.setAttribute('medium', 'anime');
       butDiv.appendChild(moreInfoButtonSpan);
+
+      var iStar = document.createElement('i');
+      iStar.className = 'far fa-star';
+      var currentId = seriesObj.mal_id.toString();
+      // var alreadyInFaves = false;
+
+      for (var b = 0; b < data.animeIDs.length; b++) {
+        var currentCheckAgainst = data.animeIDs[b];
+
+        if (currentId === currentCheckAgainst) {
+          iStar.className = 'fas fa-star';
+
+          break;
+        }
+      }
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', yearString);
+      iStar.setAttribute('episodes', seriesObj.episodes);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
+
+      butDiv.appendChild(iStar);
 
       $resultsList.appendChild($series50);
     }
@@ -125,6 +153,27 @@ function xhrReqManga() {
       moreInfoButtonSpan.setAttribute('medium', 'manga');
       butDiv.appendChild(moreInfoButtonSpan);
 
+      var iStar = document.createElement('i');
+      iStar.className = 'far fa-star';
+      var currentId = seriesObj.mal_id.toString();
+
+      for (var b = 0; b < data.mangaIDs.length; b++) {
+        var currentCheckAgainst = data.mangaIDs[b];
+
+        if (currentId === currentCheckAgainst) {
+          iStar.className = 'fas fa-star';
+          break;
+        }
+      }
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', yearString);
+      iStar.setAttribute('chapters', seriesObj.chapters);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
+
+      butDiv.appendChild(iStar);
+
       $resultsList.appendChild($series50);
     }
   });
@@ -177,6 +226,24 @@ function xhrReqSeason(year, seas) {
       moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
       moreInfoButtonSpan.setAttribute('medium', 'anime');
       butDiv.appendChild(moreInfoButtonSpan);
+
+      var iStar = document.createElement('i');
+      iStar.className = 'far fa-star';
+      var currentId = seriesObj.mal_id.toString();
+      for (var b = 0; b < data.animeIDs.length; b++) {
+        var currentCheckAgainst = data.animeIDs[b];
+        if (currentId === currentCheckAgainst) {
+          iStar.className = 'fas fa-star';
+          break;
+        }
+      }
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', yearString);
+      iStar.setAttribute('episodes', seriesObj.episodes);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
+      butDiv.appendChild(iStar);
 
       $resultsList.appendChild($series50);
     }
@@ -308,7 +375,6 @@ function xhrReqIDManga(id) {
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
 
     var currentManga = xhr.response;
 
@@ -470,8 +536,8 @@ $searchSelect.addEventListener('click', function (event) {
 });
 
 $resultsList.addEventListener('click', function (event) {
-  if (event.target.className === 'moreInfoButton') {
 
+  if (event.target.className === 'moreInfoButton') {
     $modalContent.replaceChildren();
     $modal.className = 'modal';
     var currentMedium = event.target.getAttribute('medium');
@@ -481,7 +547,27 @@ $resultsList.addEventListener('click', function (event) {
     } else if (currentMedium === 'manga') {
       xhrReqIDManga(currentId);
     }
+  }
+  if (event.target.className === 'far fa-star') {
+    var newFave = {};
+    newFave.type = event.target.getAttribute('type');
+    newFave.id = event.target.getAttribute('id');
+    newFave.title = event.target.getAttribute('title');
+    newFave.year = event.target.getAttribute('year');
+    newFave.img = event.target.getAttribute('img');
 
+    if (newFave.type === 'Manga' || newFave.type === 'Light Novel' || newFave.type === 'One-shot' || newFave.type === 'Manhwa' ||
+    newFave.type === 'Manhua' || newFave.type === 'Doujinshi' || newFave.type === 'Novel') {
+      newFave.chapters = event.target.getAttribute('chapters');
+      data.mangaIDs.push(event.target.getAttribute('id'));
+    } else {
+      newFave.episodes = event.target.getAttribute('episodes');
+      data.animeIDs.push(event.target.getAttribute('id'));
+    }
+
+    data.faves.push(newFave);
+
+    event.target.className = 'fas fa-star';
   }
 });
 
@@ -489,4 +575,72 @@ $modalContent.addEventListener('click', function (event) {
   if (event.target.className === 'modalOkButton') {
     $modal.className = 'modal hidden';
   }
+});
+
+$myList.addEventListener('click', function (event) {
+  $searches.className = 'row searches hidden';
+  $resultsList.replaceChildren();
+
+  for (var a = 0; a < data.faves.length; a++) {
+    var seriesObj = {};
+    seriesObj = data.faves[a];
+    var $series50 = document.createElement('div');
+    $series50.className = 'div series50';
+
+    var showImage = document.createElement('img');
+    showImage.setAttribute('src', seriesObj.img);
+    $series50.appendChild(showImage);
+
+    var titleDiv = document.createElement('div');
+    titleDiv.textContent = seriesObj.title;
+    $series50.appendChild(titleDiv);
+
+    var typeDiv = document.createElement('div');
+    typeDiv.textContent = seriesObj.type;
+    $series50.appendChild(typeDiv);
+
+    var yearDiv = document.createElement('div');
+    yearDiv.textContent = seriesObj.year;
+    $series50.appendChild(yearDiv);
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      var chaptersDiv = document.createElement('div');
+      chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
+      $series50.appendChild(chaptersDiv);
+    } else {
+      var episodesDiv = document.createElement('div');
+      episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
+      $series50.appendChild(episodesDiv);
+    }
+
+    var butDiv = document.createElement('div');
+    butDiv.className = 'butDiv';
+    $series50.appendChild(butDiv);
+
+    var moreInfoButtonSpan = document.createElement('span');
+    moreInfoButtonSpan.textContent = 'More Info';
+    moreInfoButtonSpan.className = 'moreInfoButton';
+    moreInfoButtonSpan.setAttribute('id', seriesObj.id);
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      moreInfoButtonSpan.setAttribute('medium', 'manga');
+    } else {
+      moreInfoButtonSpan.setAttribute('medium', 'anime');
+    }
+
+    butDiv.appendChild(moreInfoButtonSpan);
+
+    $resultsList.appendChild($series50);
+
+    $myList.className = 'myList active';
+    $goSearchBut.className = 'goSearchBut inactive';
+  }
+});
+
+$goSearchBut.addEventListener('click', function (event) {
+  $searches.className = 'row searches';
+  $myList.className = 'myList inactive';
+  $goSearchBut.className = 'goSearchBut active';
 });

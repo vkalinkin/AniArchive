@@ -42,17 +42,11 @@
   text-align: center;
 }
 
-/* .divSpan {
-  display: flex;
-  justify-content: center;
-  width: 120px;
-  text-align: center;
-} */
 .butDiv {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
-  width: 100px;
+  width: 230px;
 }
 
 .active {
@@ -85,11 +79,8 @@
 }
 
 .modalContent {
-  /* background-color: white; */
   position: fixed;
   top: 20px;
-
-  /* height: 200px; */
   width: 95%;
   padding: 12px;
   border-radius: 10px;
