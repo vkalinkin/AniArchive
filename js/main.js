@@ -326,6 +326,39 @@ function xhrReqSeason(year, seas) {
   xhr.send();
 }
 
+function xhrReqSeasonFiltered(year, seas) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
+  xhr.setRequestHeader('token', 'abc123');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    var searchResults = xhr.response.anime;
+    var filteredResults = [];
+    for (var a = 0; a < searchResults.length; a++) {
+      var currentSeries = {};
+      currentSeries = searchResults[a];
+      if (currentSeries.r18 === false) {
+        filteredResults.push(currentSeries);
+      }
+    }
+
+    buildAnime(filteredResults, 'season');
+  });
+  xhr.send();
+}
+
+// for (var a = 0; a < searchResults.length; a++) {
+//   var currentSeries = {};
+//   currentSeries = searchResults[a];
+//   // console.log('currentSeries.title', currentSeries.title);
+//   // console.log('currentSeries.rated', currentSeries.rated);
+//   if (currentSeries.rated !== 'Rx') {
+//     filteredResults.push(currentSeries);
+//     // console.log (currentSeries.title + ' passed thru');
+//   }
+// }
+// buildAnime(filteredResults, 'term');
+
 function buildModalAnime(currentAnime) {
   var modalData = document.createElement('div');
 
@@ -601,7 +634,12 @@ $seasonSearch.addEventListener('submit', function (event) {
   }
   var year = season.slice(0, 4);
   var seas = season.slice(4);
-  xhrReqSeason(year, seas);
+
+  if ($radioYesFilter.checked === true) {
+    xhrReqSeasonFiltered(year, seas);
+  } else {
+    xhrReqSeason(year, seas);
+  }
 });
 
 $searchSelect.addEventListener('click', function (event) {
