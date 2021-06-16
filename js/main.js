@@ -27,6 +27,9 @@ var $myList = document.querySelector('.myList');
 var $goSearchBut = document.querySelector('.goSearchBut');
 var $searches = document.querySelector('.searches');
 
+var $radioYesFilter = document.querySelector('#yesFilter');
+var $radioNoFilter = document.querySelector('#noFilter');
+
 var searchTerm = '';
 var season = '2021spring';
 
@@ -104,6 +107,7 @@ function buildAnime(searchResults, type) {
 }
 
 function xhrReqAnime() {
+  // console.log('START of regular anime request');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
@@ -112,6 +116,32 @@ function xhrReqAnime() {
 
     var searchResults = xhr.response.results;
     buildAnime(searchResults, 'term');
+  });
+
+  xhr.send();
+}
+
+function xhrReqAnimeFiltered() {
+  // console.log('START of xhrReqAnimeFiltered');
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+  xhr.setRequestHeader('token', 'abc123');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+
+    var searchResults = xhr.response.results;
+    var filteredResults = [];
+    for (var a = 0; a < searchResults.length; a++) {
+      var currentSeries = {};
+      currentSeries = searchResults[a];
+      // console.log('currentSeries.title', currentSeries.title);
+      // console.log('currentSeries.rated', currentSeries.rated);
+      if (currentSeries.rated !== 'Rx') {
+        filteredResults.push(currentSeries);
+        // console.log (currentSeries.title + ' passed thru');
+      }
+    }
+    buildAnime(filteredResults, 'term');
   });
 
   xhr.send();
@@ -540,7 +570,12 @@ $termSearch.addEventListener('submit', function (event) {
   searchTerm = $searchBox.value;
 
   if ($animeRadio.checked === true) {
-    xhrReqAnime();
+    if ($radioYesFilter.checked === true) {
+      xhrReqAnimeFiltered();
+    } else if ($radioNoFilter.checked === true) {
+      xhrReqAnime();
+    }
+
   } else if ($mangaRadio.checked === true) {
     xhrReqManga();
   }
