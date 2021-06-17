@@ -312,6 +312,40 @@ function xhrReqManga() {
   xhr.send();
 }
 
+function xhrReqMangaFiltered() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/manga?q=' + searchTerm);
+  xhr.setRequestHeader('token', 'abc123');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    // var searchResults = xhr.response.results.data;
+    var searchResults = xhr.response.data;
+    var filteredResults = [];
+    // console.log(xhr.response);
+    // console.log('searchResults', searchResults);
+    for (var a = 0; a < searchResults.length; a++) {
+      var current = searchResults[a];
+      var currentPass = true;
+      var genres = current.genres;
+      // console.log('current genres:' + current.genres);
+      // console.log('genres:', genres);
+      for (var b = 0; b < genres.length; b++) {
+        var currentGenreObj = {};
+        currentGenreObj = genres[b];
+        // console.log('currentGenreObj:', currentGenreObj);
+        if (currentGenreObj.name === 'Hentai') {
+          currentPass = false;
+        }
+      }
+      if (currentPass === true) {
+        filteredResults.push(current);
+      }
+    }
+    buildManga(filteredResults);
+  });
+  xhr.send();
+}
+
 function xhrReqSeason(year, seas) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
@@ -610,7 +644,14 @@ $termSearch.addEventListener('submit', function (event) {
     }
 
   } else if ($mangaRadio.checked === true) {
-    xhrReqManga();
+    // console.log('manga radio checked');
+    if ($radioYesFilter.checked === true) {
+      xhrReqMangaFiltered();
+      // console.log('radio yes');
+    } else if ($radioNoFilter.checked === true) {
+      xhrReqManga();
+      // console.log('radio no');
+    }
   }
 });
 
