@@ -34,7 +34,27 @@
       </div>
 
       <div class="row searches">
+
+        <div class="row exclude">
+          <form>
+            <span>
+              <h3 class="red">Exclude NSFW results?:</h3>
+            </span>
+            <span>
+              <input type="radio" name="filter" id="yesFilter" checked>
+              <label for="yesFilter">Yes</label>
+            </span>
+
+            <span>
+              <input type="radio" name="filter" id="noFilter">
+              <label for="noFilter">No</label>
+            </span>
+
+          </form>
+        </div>
+
         <div class="row searchSelect">
+
           <span>
             <h3>Search via:</h3>
           </span>
@@ -44,6 +64,7 @@
           <span class="butSpan">
             <h3 class="seasonButton inactive">SEASON</h3>
           </span>
+
         </div>
 
         <div class="row seasonSearch hidden">
@@ -54,12 +75,12 @@
               </span>
 
               <span>
-                <input type="radio" name="pastorPres" id="latest" value="l" checked>
+                <input type="radio" name="pastorPres" id="latest" value="l" class = "radio" checked>
                 <label for="latest" class="teal">Latest</label>
               </span>
 
               <span>
-                <input type="radio" name="pastorPres" id="previous" value="p">
+                <input type="radio" name="pastorPres" id="previous" class = "radio" value="p">
                 <label for="previous" class="teal">Previous</label>
               </span>
             </div>
@@ -149,12 +170,12 @@
                 <h3>Medium:</h3>
               </span>
               <span>
-                <input type="radio" name="medium" id="anime" value="a">
+                <input type="radio" name="medium" id="anime" value="a" class = "radio" checked>
                 <label for="anime" class="teal">Anime</label>
               </span>
 
               <span>
-                <input type="radio" name="medium" id="manga" value="m">
+                <input type="radio" name="medium" id="manga" class = "radio" value="m">
                 <label for="manga" class="teal">Manga</label>
               </span>
             </div>
@@ -169,6 +190,21 @@
             </div>
           </form>
         </div>
+
+
+        <!-- <div class="row">
+          <form>
+            <span>
+              <h3>Exclude NSFW results?:</h3>
+            </span>
+            <input type="radio" name="filter" id="yesFilter" checked>
+            <label for="yesFilter" class="teal">Yes</label>
+            <input type="radio" name="filter" id="noFilter">
+            <label for="noFilter" class="teal">No</label>
+
+          </form>
+        </div> -->
+
       </div>
 
 
@@ -183,7 +219,11 @@
 
     </div>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+
+
+
 </body>
 </html>
