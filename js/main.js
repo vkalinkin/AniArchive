@@ -107,14 +107,12 @@ function buildAnime(searchResults, type) {
 }
 
 function xhrReqAnime() {
-  // console.log('START of regular anime request');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     var searchResults = xhr.response.results;
-    // console.log('searchresults:', searchResults);
     buildAnime(searchResults, 'term');
   });
 
@@ -122,23 +120,18 @@ function xhrReqAnime() {
 }
 
 function xhrReqAnimeFiltered() {
-  // console.log('START of xhrReqAnimeFiltered');
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     var searchResults = xhr.response.results;
-    // console.log('searchresults:', searchResults);
     var filteredResults = [];
     for (var a = 0; a < searchResults.length; a++) {
       var currentSeries = {};
       currentSeries = searchResults[a];
-      // console.log('currentSeries.title', currentSeries.title);
-      // console.log('currentSeries.rated', currentSeries.rated);
       if (currentSeries.rated !== 'Rx') {
         filteredResults.push(currentSeries);
-        // console.log (currentSeries.title + ' passed thru');
       }
     }
     buildAnime(filteredResults, 'term');
@@ -146,71 +139,6 @@ function xhrReqAnimeFiltered() {
 
   xhr.send();
 }
-
-// function buildManga(searchResults) {
-//   for (var a = 0; a < searchResults.length; a++) {
-//     var seriesObj = {};
-//     seriesObj = searchResults[a];
-//     var $series50 = document.createElement('div');
-//     $series50.className = 'div series50';
-
-//     var showImage = document.createElement('img');
-//     showImage.setAttribute('src', seriesObj.image_url);
-//     $series50.appendChild(showImage);
-
-//     var titleDiv = document.createElement('div');
-//     titleDiv.textContent = seriesObj.title;
-//     $series50.appendChild(titleDiv);
-
-//     var typeDiv = document.createElement('div');
-//     typeDiv.textContent = seriesObj.type;
-//     $series50.appendChild(typeDiv);
-
-//     var yearDiv = document.createElement('div');
-//     var yearString = String(seriesObj.start_date);
-//     yearString = yearString.slice(0, 4);
-//     yearDiv.textContent = yearString;
-//     $series50.appendChild(yearDiv);
-
-//     var chaptersDiv = document.createElement('div');
-//     chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
-//     $series50.appendChild(chaptersDiv);
-
-//     var butDiv = document.createElement('div');
-//     butDiv.className = 'butDiv';
-//     $series50.appendChild(butDiv);
-
-//     var moreInfoButtonSpan = document.createElement('span');
-//     moreInfoButtonSpan.textContent = 'More Info';
-//     moreInfoButtonSpan.className = 'moreInfoButton';
-//     moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
-//     moreInfoButtonSpan.setAttribute('medium', 'manga');
-//     butDiv.appendChild(moreInfoButtonSpan);
-
-//     var iStar = document.createElement('i');
-//     iStar.className = 'far fa-star';
-//     var currentId = seriesObj.mal_id.toString();
-
-//     for (var b = 0; b < data.mangaIDs.length; b++) {
-//       var currentCheckAgainst = data.mangaIDs[b];
-
-//       if (currentId === currentCheckAgainst) {
-//         iStar.className = 'fas fa-star';
-//         break;
-//       }
-//     }
-//     iStar.setAttribute('title', seriesObj.title);
-//     iStar.setAttribute('type', seriesObj.type);
-//     iStar.setAttribute('year', yearString);
-//     iStar.setAttribute('chapters', seriesObj.chapters);
-//     iStar.setAttribute('id', seriesObj.mal_id);
-//     iStar.setAttribute('img', seriesObj.image_url);
-
-//     butDiv.appendChild(iStar);
-
-//     $resultsList.appendChild($series50);
-//   }
-// }
 
 function buildManga(searchResults) {
   for (var a = 0; a < searchResults.length; a++) {
@@ -230,24 +158,6 @@ function buildManga(searchResults) {
     var typeDiv = document.createElement('div');
     typeDiv.textContent = seriesObj.type;
     $series50.appendChild(typeDiv);
-
-    // var yearDiv = document.createElement('div');
-    // var yearString = String(seriesObj.start_date);
-    // yearString = yearString.slice(0, 4);
-    // yearDiv.textContent = yearString;
-    // $series50.appendChild(yearDiv);
-
-    // var yearDiv = document.createElement('div');
-    // yearDiv.className = 'infoRow';
-    // if (currentManga.published.from === null) {
-    //   yearDiv.textContent = "Unknown date";
-    // } else {
-    //   var pub = currentManga.published;
-    //   var fromPub = pub.from;
-    //   var year = fromPub.slice(0, 4);
-    //   yearDiv.textContent = year;
-    // }
-    // textSpan.appendChild(yearDiv);
 
     var yearDiv = document.createElement('div');
     if (seriesObj.published.from === null) {
@@ -291,7 +201,7 @@ function buildManga(searchResults) {
     iStar.setAttribute('year', yearString);
     iStar.setAttribute('chapters', seriesObj.chapters);
     iStar.setAttribute('id', seriesObj.mal_id);
-    iStar.setAttribute('img', seriesObj.image_url);
+    iStar.setAttribute('img', seriesObj.images.jpg.image_url);
 
     butDiv.appendChild(iStar);
 
@@ -299,30 +209,13 @@ function buildManga(searchResults) {
   }
 }
 
-// function xhrReqManga() {
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/manga?q=' + searchTerm);
-//   xhr.setRequestHeader('token', 'abc123');
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-
-//     var searchResults = xhr.response.results;
-//     buildManga(searchResults);
-//   });
-//   xhr.send();
-// }
-
 function xhrReqManga() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/manga?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // var searchResults = xhr.response.results.data;
     var searchResults = xhr.response.data;
-    // console.log('searchresults:', searchResults);
-    // console.log(xhr.response);
-    // console.log('searchResults', searchResults);
     buildManga(searchResults);
   });
   xhr.send();
@@ -334,22 +227,15 @@ function xhrReqMangaFiltered() {
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // var searchResults = xhr.response.results.data;
     var searchResults = xhr.response.data;
-    // console.log('searchresults:', searchResults);
     var filteredResults = [];
-    // console.log(xhr.response);
-    // console.log('searchResults', searchResults);
     for (var a = 0; a < searchResults.length; a++) {
       var current = searchResults[a];
       var currentPass = true;
       var genres = current.genres;
-      // console.log('current genres:' + current.genres);
-      // console.log('genres:', genres);
       for (var b = 0; b < genres.length; b++) {
         var currentGenreObj = {};
         currentGenreObj = genres[b];
-        // console.log('currentGenreObj:', currentGenreObj);
         if (currentGenreObj.name === 'Hentai') {
           currentPass = false;
         }
@@ -371,7 +257,6 @@ function xhrReqSeason(year, seas) {
   xhr.addEventListener('load', function () {
 
     var searchResults = xhr.response.anime;
-
     buildAnime(searchResults, 'season');
   });
   xhr.send();
@@ -392,23 +277,10 @@ function xhrReqSeasonFiltered(year, seas) {
         filteredResults.push(currentSeries);
       }
     }
-
     buildAnime(filteredResults, 'season');
   });
   xhr.send();
 }
-
-// for (var a = 0; a < searchResults.length; a++) {
-//   var currentSeries = {};
-//   currentSeries = searchResults[a];
-//   // console.log('currentSeries.title', currentSeries.title);
-//   // console.log('currentSeries.rated', currentSeries.rated);
-//   if (currentSeries.rated !== 'Rx') {
-//     filteredResults.push(currentSeries);
-//     // console.log (currentSeries.title + ' passed thru');
-//   }
-// }
-// buildAnime(filteredResults, 'term');
 
 function buildModalAnime(currentAnime) {
   var modalData = document.createElement('div');
