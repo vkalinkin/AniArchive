@@ -113,8 +113,8 @@ function xhrReqAnime() {
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-
     var searchResults = xhr.response.results;
+    // console.log('searchresults:', searchResults);
     buildAnime(searchResults, 'term');
   });
 
@@ -128,8 +128,8 @@ function xhrReqAnimeFiltered() {
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-
     var searchResults = xhr.response.results;
+    // console.log('searchresults:', searchResults);
     var filteredResults = [];
     for (var a = 0; a < searchResults.length; a++) {
       var currentSeries = {};
@@ -237,11 +237,26 @@ function buildManga(searchResults) {
     // yearDiv.textContent = yearString;
     // $series50.appendChild(yearDiv);
 
+    // var yearDiv = document.createElement('div');
+    // yearDiv.className = 'infoRow';
+    // if (currentManga.published.from === null) {
+    //   yearDiv.textContent = "Unknown date";
+    // } else {
+    //   var pub = currentManga.published;
+    //   var fromPub = pub.from;
+    //   var year = fromPub.slice(0, 4);
+    //   yearDiv.textContent = year;
+    // }
+    // textSpan.appendChild(yearDiv);
+
     var yearDiv = document.createElement('div');
-    var yearString = String(seriesObj.published.from);
-    // console.log('yearString:', yearString);
-    yearString = yearString.slice(0, 4);
-    yearDiv.textContent = yearString;
+    if (seriesObj.published.from === null) {
+      yearDiv.textContent = 'Unknown date';
+    } else {
+      var yearString = String(seriesObj.published.from);
+      yearString = yearString.slice(0, 4);
+      yearDiv.textContent = yearString;
+    }
     $series50.appendChild(yearDiv);
 
     var chaptersDiv = document.createElement('div');
@@ -305,6 +320,7 @@ function xhrReqManga() {
   xhr.addEventListener('load', function () {
     // var searchResults = xhr.response.results.data;
     var searchResults = xhr.response.data;
+    // console.log('searchresults:', searchResults);
     // console.log(xhr.response);
     // console.log('searchResults', searchResults);
     buildManga(searchResults);
@@ -320,6 +336,7 @@ function xhrReqMangaFiltered() {
   xhr.addEventListener('load', function () {
     // var searchResults = xhr.response.results.data;
     var searchResults = xhr.response.data;
+    // console.log('searchresults:', searchResults);
     var filteredResults = [];
     // console.log(xhr.response);
     // console.log('searchResults', searchResults);
@@ -542,10 +559,14 @@ function buildModalManga(currentManga) {
 
   var yearDiv = document.createElement('div');
   yearDiv.className = 'infoRow';
-  var pub = currentManga.published;
-  var fromPub = pub.from;
-  var year = fromPub.slice(0, 4);
-  yearDiv.textContent = year;
+  if (currentManga.published.from === null) {
+    yearDiv.textContent = 'Unknown date';
+  } else {
+    var pub = currentManga.published;
+    var fromPub = pub.from;
+    var year = fromPub.slice(0, 4);
+    yearDiv.textContent = year;
+  }
   textSpan.appendChild(yearDiv);
 
   var typeDiv = document.createElement('div');
