@@ -103,6 +103,26 @@ input:checked {
 
 .series50 {
   margin-bottom: 40px;
+  transition: opacity 400ms;
+  animation: slide-up 0.5s ease;
+
+  /* will-change: opacity; */
+}
+
+/* .fadedOut {
+  opacity: 0;
+} */
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .moreInfoButton {
