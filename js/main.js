@@ -665,7 +665,21 @@ $resultsList.addEventListener('click', function (event) {
       }
       data.mangaIDs.splice(oldMangaIndex, 1);
       // console.log('spliced out at ', oldMangaIndex);
+    } else {
+      var oldAnimeId;
+      oldAnimeId = oldFave.id;
+      var oldAnimeIndex;
+      var currentAnimeID;
+      for (var c = 0; c < data.animeIDs.length; c++) {
+        currentAnimeID = data.animeIDs[c];
+        if (oldAnimeId === currentAnimeID) {
+          oldAnimeIndex = c;
+          break;
+        }
+      }
+      data.animeIDs.splice(oldAnimeIndex, 1);
     }
+
     event.target.className = 'far fa-star';
   }
 });
