@@ -116,6 +116,11 @@ input > .radio:checked {
 input:checked {
   border: 6px solid black;
 } */
+.resultsTitle {
+  margin-bottom: 10px;
+  font-size: larger;
+  font-weight: bolder;
+}
 
 .series50 {
   margin-bottom: 40px;

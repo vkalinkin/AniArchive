@@ -30,6 +30,8 @@ var $searches = document.querySelector('.searches');
 var $radioYesFilter = document.querySelector('#yesFilter');
 var $radioNoFilter = document.querySelector('#noFilter');
 
+var $resultsTitle = document.querySelector('.resultsTitle');
+
 var searchTerm = '';
 var season = '2021spring';
 
@@ -535,6 +537,7 @@ $termSearch.addEventListener('submit', function (event) {
     } else if ($radioNoFilter.checked === true) {
       xhrReqAnime();
     }
+    $resultsTitle.textContent = "Anime search results for term '" + searchTerm + "' :";
 
   } else if ($mangaRadio.checked === true) {
 
@@ -543,6 +546,7 @@ $termSearch.addEventListener('submit', function (event) {
     } else if ($radioNoFilter.checked === true) {
       xhrReqManga();
     }
+    $resultsTitle.textContent = "Manga search results for term '" + searchTerm + "' :";
   }
 });
 
@@ -566,12 +570,14 @@ $seasonSearch.addEventListener('submit', function (event) {
   }
   var year = season.slice(0, 4);
   var seas = season.slice(4);
+  var cap = seas.charAt(0).toUpperCase() + seas.slice(1);
 
   if ($radioYesFilter.checked === true) {
     xhrReqSeasonFiltered(year, seas);
   } else {
     xhrReqSeason(year, seas);
   }
+  $resultsTitle.textContent = 'Season search results for ' + cap + ' ' + year + ':';
 });
 
 $searchSelect.addEventListener('click', function (event) {
@@ -695,6 +701,7 @@ $modalContent.addEventListener('click', function (event) {
 
 $myList.addEventListener('click', function (event) {
   $searches.className = 'row searches hidden';
+  $resultsTitle.textContent = 'Current favorites in My List:';
   $resultsList.replaceChildren();
 
   for (var a = 0; a < data.faves.length; a++) {
