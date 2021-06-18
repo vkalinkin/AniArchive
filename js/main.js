@@ -537,13 +537,11 @@ $termSearch.addEventListener('submit', function (event) {
     }
 
   } else if ($mangaRadio.checked === true) {
-    // console.log('manga radio checked');
+
     if ($radioYesFilter.checked === true) {
       xhrReqMangaFiltered();
-      // console.log('radio yes');
     } else if ($radioNoFilter.checked === true) {
       xhrReqManga();
-      // console.log('radio no');
     }
   }
 });
@@ -606,6 +604,7 @@ $resultsList.addEventListener('click', function (event) {
     }
   }
   if (event.target.className === 'far fa-star') {
+    // console.log('empty star clicked');
     var newFave = {};
     newFave.type = event.target.getAttribute('type');
     newFave.id = event.target.getAttribute('id');
@@ -625,6 +624,49 @@ $resultsList.addEventListener('click', function (event) {
     data.faves.push(newFave);
 
     event.target.className = 'fas fa-star';
+
+  } else if (event.target.className === 'fas fa-star') {
+    // console.log('solid star clicked');
+    var oldFave = {};
+    oldFave.type = event.target.getAttribute('type');
+    oldFave.id = event.target.getAttribute('id');
+    var oldFaveIndex;
+    for (var a = 0; a < data.faves.length; a++) {
+      var currentFave = {};
+      currentFave = data.faves[a];
+      if (oldFave.id === currentFave.id) {
+        if (oldFave.type === currentFave.type) {
+          oldFaveIndex = a;
+          break;
+        }
+      }
+    }
+    data.faves.splice(oldFaveIndex, 1);
+
+    if (oldFave.type === 'Manga' || oldFave.type === 'Light Novel' || oldFave.type === 'One-shot' || oldFave.type === 'Manhwa' ||
+      oldFave.type === 'Manhua' || oldFave.type === 'Doujinshi' || oldFave.type === 'Novel') {
+      // var oldManga = {};
+      // oldManga.id = event.target.getAttribute('id');
+
+      var oldMangaId;
+      oldMangaId = oldFave.id;
+      // console.log('oldMangaId', oldMangaId);
+      var oldMangaIndex;
+      // console.log('currentManga', currentManga);
+      var currentMangaID;
+      for (var b = 0; b < data.mangaIDs.length; b++) {
+
+        currentMangaID = data.mangaIDs[b];
+        // console.log('current manga:', currentMangaID);
+        if (oldMangaId === currentMangaID) {
+          oldMangaIndex = b;
+          break;
+        }
+      }
+      data.mangaIDs.splice(oldMangaIndex, 1);
+      // console.log('spliced out at ', oldMangaIndex);
+    }
+    event.target.className = 'far fa-star';
   }
 });
 
@@ -701,5 +743,3 @@ $goSearchBut.addEventListener('click', function (event) {
   $myList.className = 'myList inactive';
   $goSearchBut.className = 'goSearchBut active';
 });
-
-// gsap.from($resultsList, {duration: 2, opacity: 0, y: 300, stagger: 0.25});
