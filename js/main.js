@@ -54,15 +54,18 @@ function buildAnime(searchResults, type) {
     typeDiv.textContent = seriesObj.type;
     $series50.appendChild(typeDiv);
 
+    var yr;
     var yearDiv = document.createElement('div');
     if (type === 'term') {
       var yearString = String(seriesObj.start_date);
       yearString = yearString.slice(0, 4);
       yearDiv.textContent = yearString;
+      yr = yearString;
     } else {
       var yearAirString = String(seriesObj.airing_start);
       yearAirString = yearAirString.slice(0, 4);
       yearDiv.textContent = yearAirString;
+      yr = yearAirString;
     }
 
     $series50.appendChild(yearDiv);
@@ -97,7 +100,7 @@ function buildAnime(searchResults, type) {
     }
     iStar.setAttribute('title', seriesObj.title);
     iStar.setAttribute('type', seriesObj.type);
-    iStar.setAttribute('year', yearString);
+    iStar.setAttribute('year', yr);
     iStar.setAttribute('episodes', seriesObj.episodes);
     iStar.setAttribute('id', seriesObj.mal_id);
     iStar.setAttribute('img', seriesObj.image_url);
