@@ -38,18 +38,24 @@
 @media screen and (min-width: 514px) {
   .series50 {
     width: 50%;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
 @media screen and (min-width: 746px) {
   .series50 {
     width: calc(100% / 3);
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
 @media screen and (min-width: 950px) {
   .series50 {
     width: 25%;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

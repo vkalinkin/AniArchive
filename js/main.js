@@ -630,13 +630,16 @@ $resultsList.addEventListener('click', function (event) {
     var oldFave = {};
     oldFave.type = event.target.getAttribute('type');
     oldFave.id = event.target.getAttribute('id');
+    // console.log('old fave:', oldFave);
     var oldFaveIndex;
     for (var a = 0; a < data.faves.length; a++) {
       var currentFave = {};
       currentFave = data.faves[a];
+      // console.log('currentFave:', currentFave);
       if (oldFave.id === currentFave.id) {
         if (oldFave.type === currentFave.type) {
           oldFaveIndex = a;
+          // console.log('id match');
           break;
         }
       }
@@ -756,7 +759,7 @@ $myList.addEventListener('click', function (event) {
       // iStar.setAttribute('year', yearString);
       iStar.setAttribute('year', seriesObj.year);
       iStar.setAttribute('chapters', seriesObj.chapters);
-      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('id', seriesObj.id);
       iStar.setAttribute('img', seriesObj.img);
     } else {
       iStar.setAttribute('title', seriesObj.title);
@@ -764,7 +767,7 @@ $myList.addEventListener('click', function (event) {
       // iStar.setAttribute('year', yearString);
       iStar.setAttribute('year', seriesObj.year);
       iStar.setAttribute('episodes', seriesObj.episodes);
-      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('id', seriesObj.id);
       iStar.setAttribute('img', seriesObj.img);
     }
 
