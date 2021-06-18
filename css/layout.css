@@ -24,6 +24,11 @@
   }
 }
 
+.excludeRadios {
+  display: flex;
+  justify-content: space-around;
+}
+
 .series50 {
   width: 225px;
   margin-left: auto;
