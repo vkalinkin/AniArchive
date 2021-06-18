@@ -22,11 +22,9 @@
 .myList {
   text-align: center;
   width: 80px;
+  cursor: pointer;
 }
 
-/* .searches {
-  height: 40px;
-} */
 .exclude {
   min-width: 350px;
 }
@@ -35,14 +33,13 @@
   width: 80px;
   text-align: center;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .searchSelect {
   max-width: 40%;
   justify-content: space-around;
   align-items: center;
-
-  /* height: 50px; */
 }
 
 .mediumSelect {
@@ -65,57 +62,27 @@
   height: 16px;
   border: 2px solid #319e77;
   transition: 0.1s all linear;
+  cursor: pointer;
 }
 
 .radio:checked {
   border: 6px solid #319e77;
+  cursor: pointer;
 }
 
-
-/* input > .radio {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  border: 2px solid black;
-  transition: 0.2s all linear;
+.radioLabel {
+  cursor: pointer;
 }
 
-input > .radio:checked {
-  border: 6px solid black;
-} */
-
-/* .mediumSelect > input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  border: 2px solid black;
-  transition: 0.2s all linear;
+.submitButton {
+  cursor: pointer;
+  transition: background-color 0.5s;
 }
 
-.mediumSelect > input:checked {
-  border: 6px solid black;
-} */
-
-/* input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  border: 2px solid black;
-  transition: 0.2s all linear;
+.submitButton:hover {
+  background-color: black;
 }
 
-input:checked {
-  border: 6px solid black;
-} */
 .resultsTitle {
   margin-bottom: 10px;
   font-size: larger;
@@ -126,13 +93,7 @@ input:checked {
   margin-bottom: 40px;
   transition: opacity 400ms;
   animation: slide-up 0.5s ease;
-
-  /* will-change: opacity; */
 }
-
-/* .fadedOut {
-  opacity: 0;
-} */
 
 @keyframes slide-up {
   0% {
@@ -152,6 +113,12 @@ input:checked {
   border: none;
   color: white;
   width: 100px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.moreInfoButton:hover {
+  background-color: black;
 }
 
 label {
@@ -169,6 +136,7 @@ label {
 #searchBox {
   margin-right: 10px;
   background-color: white;
+  cursor: pointer;
 }
 
 button {
@@ -182,10 +150,12 @@ button {
 
 .termButton {
   width: 100px;
+  cursor: pointer;
 }
 
 .seasonButton {
   width: 100px;
+  cursor: pointer;
 }
 
 .seasonLast {
@@ -196,11 +166,13 @@ button {
 #seasonDropDown {
   margin-right: 10px;
   background-color: white;
+  cursor: pointer;
 }
 
 #yearDropDown {
   margin-right: 10px;
   background-color: white;
+  cursor: pointer;
 }
 
 .textSpan {
@@ -208,7 +180,6 @@ button {
 }
 
 .infoImg {
-  /* margin-right: 10px; */
   width: 80px;
 }
 
@@ -245,8 +216,18 @@ button {
   border: none;
   color: white;
   padding: 5px 15px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.modalOkButton:hover {
+  background-color: black;
 }
 
 i {
   color: #319e77;
+}
+
+.fa-star {
+  cursor: pointer;
 }

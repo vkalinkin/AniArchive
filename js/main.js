@@ -610,7 +610,6 @@ $resultsList.addEventListener('click', function (event) {
     }
   }
   if (event.target.className === 'far fa-star') {
-    // console.log('empty star clicked');
     var newFave = {};
     newFave.type = event.target.getAttribute('type');
     newFave.id = event.target.getAttribute('id');
@@ -632,20 +631,16 @@ $resultsList.addEventListener('click', function (event) {
     event.target.className = 'fas fa-star';
 
   } else if (event.target.className === 'fas fa-star') {
-    // console.log('solid star clicked');
     var oldFave = {};
     oldFave.type = event.target.getAttribute('type');
     oldFave.id = event.target.getAttribute('id');
-    // console.log('old fave:', oldFave);
     var oldFaveIndex;
     for (var a = 0; a < data.faves.length; a++) {
       var currentFave = {};
       currentFave = data.faves[a];
-      // console.log('currentFave:', currentFave);
       if (oldFave.id === currentFave.id) {
         if (oldFave.type === currentFave.type) {
           oldFaveIndex = a;
-          // console.log('id match');
           break;
         }
       }
@@ -654,26 +649,18 @@ $resultsList.addEventListener('click', function (event) {
 
     if (oldFave.type === 'Manga' || oldFave.type === 'Light Novel' || oldFave.type === 'One-shot' || oldFave.type === 'Manhwa' ||
       oldFave.type === 'Manhua' || oldFave.type === 'Doujinshi' || oldFave.type === 'Novel') {
-      // var oldManga = {};
-      // oldManga.id = event.target.getAttribute('id');
-
       var oldMangaId;
       oldMangaId = oldFave.id;
-      // console.log('oldMangaId', oldMangaId);
       var oldMangaIndex;
-      // console.log('currentManga', currentManga);
       var currentMangaID;
       for (var b = 0; b < data.mangaIDs.length; b++) {
-
         currentMangaID = data.mangaIDs[b];
-        // console.log('current manga:', currentMangaID);
         if (oldMangaId === currentMangaID) {
           oldMangaIndex = b;
           break;
         }
       }
       data.mangaIDs.splice(oldMangaIndex, 1);
-      // console.log('spliced out at ', oldMangaIndex);
     } else {
       var oldAnimeId;
       oldAnimeId = oldFave.id;
@@ -757,13 +744,11 @@ $myList.addEventListener('click', function (event) {
 
     var iStar = document.createElement('i');
     iStar.className = 'fas fa-star';
-    // var currentId = seriesObj.mal_id.toString();
 
     if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
       seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
       iStar.setAttribute('title', seriesObj.title);
       iStar.setAttribute('type', seriesObj.type);
-      // iStar.setAttribute('year', yearString);
       iStar.setAttribute('year', seriesObj.year);
       iStar.setAttribute('chapters', seriesObj.chapters);
       iStar.setAttribute('id', seriesObj.id);
@@ -771,7 +756,6 @@ $myList.addEventListener('click', function (event) {
     } else {
       iStar.setAttribute('title', seriesObj.title);
       iStar.setAttribute('type', seriesObj.type);
-      // iStar.setAttribute('year', yearString);
       iStar.setAttribute('year', seriesObj.year);
       iStar.setAttribute('episodes', seriesObj.episodes);
       iStar.setAttribute('id', seriesObj.id);

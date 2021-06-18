@@ -25,14 +25,9 @@
 }
 
 .series50 {
-  /* display: flex; */
-
-  /* width: 100%; */
   width: 225px;
   margin-left: auto;
   margin-right: auto;
-
-  /* justify-content: center; */
 }
 
 @media screen and (min-width: 514px) {
@@ -89,6 +84,12 @@
   color: black;
   width: 80px;
   height: 25px;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.inactive:hover {
+  color: white;
+  background-color: black;
 }
 
 .modal {
