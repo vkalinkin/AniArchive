@@ -745,6 +745,31 @@ $myList.addEventListener('click', function (event) {
 
     butDiv.appendChild(moreInfoButtonSpan);
 
+    var iStar = document.createElement('i');
+    iStar.className = 'fas fa-star';
+    // var currentId = seriesObj.mal_id.toString();
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      // iStar.setAttribute('year', yearString);
+      iStar.setAttribute('year', seriesObj.year);
+      iStar.setAttribute('chapters', seriesObj.chapters);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.img);
+    } else {
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      // iStar.setAttribute('year', yearString);
+      iStar.setAttribute('year', seriesObj.year);
+      iStar.setAttribute('episodes', seriesObj.episodes);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.img);
+    }
+
+    butDiv.appendChild(iStar);
+
     $resultsList.appendChild($series50);
 
     $myList.className = 'myList active';
