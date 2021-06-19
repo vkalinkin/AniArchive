@@ -30,6 +30,8 @@ var $searches = document.querySelector('.searches');
 var $radioYesFilter = document.querySelector('#yesFilter');
 var $radioNoFilter = document.querySelector('#noFilter');
 
+var $resultsTitle = document.querySelector('.resultsTitle');
+
 var searchTerm = '';
 var season = '2021spring';
 
@@ -52,15 +54,18 @@ function buildAnime(searchResults, type) {
     typeDiv.textContent = seriesObj.type;
     $series50.appendChild(typeDiv);
 
+    var yr;
     var yearDiv = document.createElement('div');
     if (type === 'term') {
       var yearString = String(seriesObj.start_date);
       yearString = yearString.slice(0, 4);
       yearDiv.textContent = yearString;
+      yr = yearString;
     } else {
       var yearAirString = String(seriesObj.airing_start);
       yearAirString = yearAirString.slice(0, 4);
       yearDiv.textContent = yearAirString;
+      yr = yearAirString;
     }
 
     $series50.appendChild(yearDiv);
@@ -95,7 +100,7 @@ function buildAnime(searchResults, type) {
     }
     iStar.setAttribute('title', seriesObj.title);
     iStar.setAttribute('type', seriesObj.type);
-    iStar.setAttribute('year', yearString);
+    iStar.setAttribute('year', yr);
     iStar.setAttribute('episodes', seriesObj.episodes);
     iStar.setAttribute('id', seriesObj.mal_id);
     iStar.setAttribute('img', seriesObj.image_url);
@@ -535,16 +540,16 @@ $termSearch.addEventListener('submit', function (event) {
     } else if ($radioNoFilter.checked === true) {
       xhrReqAnime();
     }
+    $resultsTitle.textContent = "Anime search results for term '" + searchTerm + "' :";
 
   } else if ($mangaRadio.checked === true) {
-    // console.log('manga radio checked');
+
     if ($radioYesFilter.checked === true) {
       xhrReqMangaFiltered();
-      // console.log('radio yes');
     } else if ($radioNoFilter.checked === true) {
       xhrReqManga();
-      // console.log('radio no');
     }
+    $resultsTitle.textContent = "Manga search results for term '" + searchTerm + "' :";
   }
 });
 
@@ -568,12 +573,14 @@ $seasonSearch.addEventListener('submit', function (event) {
   }
   var year = season.slice(0, 4);
   var seas = season.slice(4);
+  var cap = seas.charAt(0).toUpperCase() + seas.slice(1);
 
   if ($radioYesFilter.checked === true) {
     xhrReqSeasonFiltered(year, seas);
   } else {
     xhrReqSeason(year, seas);
   }
+  $resultsTitle.textContent = 'Season search results for ' + cap + ' ' + year + ':';
 });
 
 $searchSelect.addEventListener('click', function (event) {
@@ -625,6 +632,54 @@ $resultsList.addEventListener('click', function (event) {
     data.faves.push(newFave);
 
     event.target.className = 'fas fa-star';
+
+  } else if (event.target.className === 'fas fa-star') {
+    var oldFave = {};
+    oldFave.type = event.target.getAttribute('type');
+    oldFave.id = event.target.getAttribute('id');
+    var oldFaveIndex;
+    for (var a = 0; a < data.faves.length; a++) {
+      var currentFave = {};
+      currentFave = data.faves[a];
+      if (oldFave.id === currentFave.id) {
+        if (oldFave.type === currentFave.type) {
+          oldFaveIndex = a;
+          break;
+        }
+      }
+    }
+    data.faves.splice(oldFaveIndex, 1);
+
+    if (oldFave.type === 'Manga' || oldFave.type === 'Light Novel' || oldFave.type === 'One-shot' || oldFave.type === 'Manhwa' ||
+      oldFave.type === 'Manhua' || oldFave.type === 'Doujinshi' || oldFave.type === 'Novel') {
+      var oldMangaId;
+      oldMangaId = oldFave.id;
+      var oldMangaIndex;
+      var currentMangaID;
+      for (var b = 0; b < data.mangaIDs.length; b++) {
+        currentMangaID = data.mangaIDs[b];
+        if (oldMangaId === currentMangaID) {
+          oldMangaIndex = b;
+          break;
+        }
+      }
+      data.mangaIDs.splice(oldMangaIndex, 1);
+    } else {
+      var oldAnimeId;
+      oldAnimeId = oldFave.id;
+      var oldAnimeIndex;
+      var currentAnimeID;
+      for (var c = 0; c < data.animeIDs.length; c++) {
+        currentAnimeID = data.animeIDs[c];
+        if (oldAnimeId === currentAnimeID) {
+          oldAnimeIndex = c;
+          break;
+        }
+      }
+      data.animeIDs.splice(oldAnimeIndex, 1);
+    }
+
+    event.target.className = 'far fa-star';
   }
 });
 
@@ -636,6 +691,7 @@ $modalContent.addEventListener('click', function (event) {
 
 $myList.addEventListener('click', function (event) {
   $searches.className = 'row searches hidden';
+  $resultsTitle.textContent = 'Current favorites in My List:';
   $resultsList.replaceChildren();
 
   for (var a = 0; a < data.faves.length; a++) {
@@ -689,6 +745,28 @@ $myList.addEventListener('click', function (event) {
 
     butDiv.appendChild(moreInfoButtonSpan);
 
+    var iStar = document.createElement('i');
+    iStar.className = 'fas fa-star';
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', seriesObj.year);
+      iStar.setAttribute('chapters', seriesObj.chapters);
+      iStar.setAttribute('id', seriesObj.id);
+      iStar.setAttribute('img', seriesObj.img);
+    } else {
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', seriesObj.year);
+      iStar.setAttribute('episodes', seriesObj.episodes);
+      iStar.setAttribute('id', seriesObj.id);
+      iStar.setAttribute('img', seriesObj.img);
+    }
+
+    butDiv.appendChild(iStar);
+
     $resultsList.appendChild($series50);
 
     $myList.className = 'myList active';
@@ -701,5 +779,3 @@ $goSearchBut.addEventListener('click', function (event) {
   $myList.className = 'myList inactive';
   $goSearchBut.className = 'goSearchBut active';
 });
-
-// gsap.from($resultsList, {duration: 2, opacity: 0, y: 300, stagger: 0.25});
