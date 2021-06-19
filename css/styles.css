@@ -151,11 +151,13 @@ button {
 .termButton {
   width: 100px;
   cursor: pointer;
+  height: 23px;
 }
 
 .seasonButton {
   width: 100px;
   cursor: pointer;
+  height: 23px;
 }
 
 .seasonLast {
@@ -175,12 +177,13 @@ button {
   cursor: pointer;
 }
 
-.textSpan {
+/* .textSpan {
   padding-left: 10px;
-}
+} */
 
 .infoImg {
   width: 80px;
+  padding-right: 10px;
 }
 
 .infoRow {
@@ -192,14 +195,14 @@ button {
   overflow: auto;
 }
 
-@media screen and (min-width: 514px) {
+@media screen and (min-width: 550px) {
   .synop {
     max-height: 350px;
     overflow: auto;
   }
 }
 
-@media screen and (min-width: 514px) {
+@media screen and (min-width: 550px) {
   .infoImg {
     width: 100%;
   }
@@ -230,4 +233,9 @@ i {
 
 .fa-star {
   cursor: pointer;
+  transition: color 0.5s;
+}
+
+.fa-star:hover {
+  color: black;
 }

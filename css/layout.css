@@ -18,7 +18,7 @@
   justify-content: center;
 }
 
-@media screen and (min-width: 514px) {
+@media screen and (min-width: 524px) {
   .resultsList {
     justify-content: left;
   }
@@ -35,7 +35,7 @@
   margin-right: auto;
 }
 
-@media screen and (min-width: 514px) {
+@media screen and (min-width: 524px) {
   .series50 {
     width: 50%;
     margin-left: 0;
@@ -43,7 +43,7 @@
   }
 }
 
-@media screen and (min-width: 746px) {
+@media screen and (min-width: 742px) {
   .series50 {
     width: calc(100% / 3);
     margin-left: 0;
@@ -51,7 +51,7 @@
   }
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 960px) {
   .series50 {
     width: 25%;
     margin-left: 0;
