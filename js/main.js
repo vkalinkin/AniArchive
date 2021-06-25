@@ -431,32 +431,72 @@ function buildManga(searchResults) {
   }
 }
 
+// function xhrReqManga() {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/manga?q=' + searchTerm);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var searchResults = xhr.response.data;
+//     buildManga(searchResults);
+//   });
+//   xhr.send();
+// }
+
 function xhrReqManga() {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/manga?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var searchResults = xhr.response.data;
+    const searchResults = xhr.response.data;
     buildManga(searchResults);
   });
   xhr.send();
 }
 
+// function xhrReqMangaFiltered() {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/manga?q=' + searchTerm);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var searchResults = xhr.response.data;
+//     var filteredResults = [];
+//     for (var a = 0; a < searchResults.length; a++) {
+//       var current = searchResults[a];
+//       var currentPass = true;
+//       var genres = current.genres;
+//       for (var b = 0; b < genres.length; b++) {
+//         var currentGenreObj = {};
+//         currentGenreObj = genres[b];
+//         if (currentGenreObj.name === 'Hentai') {
+//           currentPass = false;
+//         }
+//       }
+//       if (currentPass === true) {
+//         filteredResults.push(current);
+//       }
+//     }
+//     buildManga(filteredResults);
+//   });
+//   xhr.send();
+// }
+
 function xhrReqMangaFiltered() {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/manga?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var searchResults = xhr.response.data;
-    var filteredResults = [];
-    for (var a = 0; a < searchResults.length; a++) {
-      var current = searchResults[a];
-      var currentPass = true;
-      var genres = current.genres;
-      for (var b = 0; b < genres.length; b++) {
-        var currentGenreObj = {};
+    const searchResults = xhr.response.data;
+    const filteredResults = [];
+    for (let a = 0; a < searchResults.length; a++) {
+      const current = searchResults[a];
+      let currentPass = true;
+      const genres = current.genres;
+      for (let b = 0; b < genres.length; b++) {
+        let currentGenreObj = {};
         currentGenreObj = genres[b];
         if (currentGenreObj.name === 'Hentai') {
           currentPass = false;
