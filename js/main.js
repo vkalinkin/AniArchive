@@ -1,39 +1,71 @@
 /* global data */
 /* exported data */
-var $resultsList = document.querySelector('.resultsList');
-var $searchBox = document.querySelector('#searchBox');
+// var $resultsList = document.querySelector('.resultsList');
+// var $searchBox = document.querySelector('#searchBox');
 
-var $searchSelect = document.querySelector('.searchSelect');
-var $seasonSearch = document.querySelector('.seasonSearch');
-var $termSearch = document.querySelector('.termSearch');
+// var $searchSelect = document.querySelector('.searchSelect');
+// var $seasonSearch = document.querySelector('.seasonSearch');
+// var $termSearch = document.querySelector('.termSearch');
 
-var $termButton = document.querySelector('.termButton');
-var $seasonButton = document.querySelector('.seasonButton');
+// var $termButton = document.querySelector('.termButton');
+// var $seasonButton = document.querySelector('.seasonButton');
 
-var $animeRadio = document.querySelector('#anime');
-var $mangaRadio = document.querySelector('#manga');
+// var $animeRadio = document.querySelector('#anime');
+// var $mangaRadio = document.querySelector('#manga');
 
-var $pastOrPresent = document.querySelector('.pastOrPresent');
-var $latestRadio = document.querySelector('#latest');
-var $previousRadio = document.querySelector('#previous');
-var $dropDowns = document.querySelector('.dropDowns');
-var $yearDropDown = document.querySelector('#yearDropDown');
-var $seasonDropDown = document.querySelector('#seasonDropDown');
+// var $pastOrPresent = document.querySelector('.pastOrPresent');
+// var $latestRadio = document.querySelector('#latest');
+// var $previousRadio = document.querySelector('#previous');
+// var $dropDowns = document.querySelector('.dropDowns');
+// var $yearDropDown = document.querySelector('#yearDropDown');
+// var $seasonDropDown = document.querySelector('#seasonDropDown');
 
-var $modal = document.querySelector('.modal');
-var $modalContent = document.querySelector('.modalContent');
+// var $modal = document.querySelector('.modal');
+// var $modalContent = document.querySelector('.modalContent');
 
-var $myList = document.querySelector('.myList');
-var $goSearchBut = document.querySelector('.goSearchBut');
-var $searches = document.querySelector('.searches');
+// var $myList = document.querySelector('.myList');
+// var $goSearchBut = document.querySelector('.goSearchBut');
+// var $searches = document.querySelector('.searches');
 
-var $radioYesFilter = document.querySelector('#yesFilter');
-var $radioNoFilter = document.querySelector('#noFilter');
+// var $radioYesFilter = document.querySelector('#yesFilter');
+// var $radioNoFilter = document.querySelector('#noFilter');
 
-var $resultsTitle = document.querySelector('.resultsTitle');
+// var $resultsTitle = document.querySelector('.resultsTitle');
 
-var searchTerm = '';
-var season = '2021spring';
+const $resultsList = document.querySelector('.resultsList');
+const $searchBox = document.querySelector('#searchBox');
+
+const $searchSelect = document.querySelector('.searchSelect');
+const $seasonSearch = document.querySelector('.seasonSearch');
+const $termSearch = document.querySelector('.termSearch');
+
+const $termButton = document.querySelector('.termButton');
+const $seasonButton = document.querySelector('.seasonButton');
+
+const $animeRadio = document.querySelector('#anime');
+const $mangaRadio = document.querySelector('#manga');
+
+const $pastOrPresent = document.querySelector('.pastOrPresent');
+const $latestRadio = document.querySelector('#latest');
+const $previousRadio = document.querySelector('#previous');
+const $dropDowns = document.querySelector('.dropDowns');
+const $yearDropDown = document.querySelector('#yearDropDown');
+const $seasonDropDown = document.querySelector('#seasonDropDown');
+
+const $modal = document.querySelector('.modal');
+const $modalContent = document.querySelector('.modalContent');
+
+const $myList = document.querySelector('.myList');
+const $goSearchBut = document.querySelector('.goSearchBut');
+const $searches = document.querySelector('.searches');
+
+const $radioYesFilter = document.querySelector('#yesFilter');
+const $radioNoFilter = document.querySelector('#noFilter');
+
+const $resultsTitle = document.querySelector('.resultsTitle');
+
+let searchTerm = '';
+let season = '2021spring';
 
 function buildAnime(searchResults, type) {
   for (var a = 0; a < searchResults.length; a++) {
