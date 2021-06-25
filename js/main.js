@@ -67,35 +67,112 @@ const $resultsTitle = document.querySelector('.resultsTitle');
 let searchTerm = '';
 let season = '2021spring';
 
+// function buildAnime(searchResults, type) {
+//   $resultsList.replaceChildren();
+//   for (var a = 0; a < searchResults.length; a++) {
+//     var seriesObj = {};
+//     seriesObj = searchResults[a];
+//     var $series50 = document.createElement('div');
+//     $series50.className = 'series50';
+
+//     var showImage = document.createElement('img');
+//     showImage.setAttribute('src', seriesObj.image_url);
+//     $series50.appendChild(showImage);
+
+//     var titleDiv = document.createElement('div');
+//     titleDiv.textContent = seriesObj.title;
+//     $series50.appendChild(titleDiv);
+
+//     var typeDiv = document.createElement('div');
+//     typeDiv.textContent = seriesObj.type;
+//     $series50.appendChild(typeDiv);
+
+//     var yr;
+//     var yearDiv = document.createElement('div');
+//     if (type === 'term') {
+//       var yearString = String(seriesObj.start_date);
+//       yearString = yearString.slice(0, 4);
+//       yearDiv.textContent = yearString;
+//       yr = yearString;
+//     } else {
+//       var yearAirString = String(seriesObj.airing_start);
+//       yearAirString = yearAirString.slice(0, 4);
+//       yearDiv.textContent = yearAirString;
+//       yr = yearAirString;
+//     }
+
+//     $series50.appendChild(yearDiv);
+
+//     var episodesDiv = document.createElement('div');
+//     episodesDiv.textContent = 'Episode(s): ' + seriesObj.episodes;
+//     $series50.appendChild(episodesDiv);
+
+//     var butDiv = document.createElement('div');
+//     butDiv.className = 'butDiv';
+//     $series50.appendChild(butDiv);
+
+//     var moreInfoButtonSpan = document.createElement('span');
+//     moreInfoButtonSpan.textContent = 'More Info';
+//     moreInfoButtonSpan.className = 'moreInfoButton';
+//     moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
+//     moreInfoButtonSpan.setAttribute('medium', 'anime');
+//     butDiv.appendChild(moreInfoButtonSpan);
+
+//     var iStar = document.createElement('i');
+//     iStar.className = 'far fa-star';
+//     var currentId = seriesObj.mal_id.toString();
+
+//     for (var b = 0; b < data.animeIDs.length; b++) {
+//       var currentCheckAgainst = data.animeIDs[b];
+
+//       if (currentId === currentCheckAgainst) {
+//         iStar.className = 'fas fa-star';
+
+//         break;
+//       }
+//     }
+//     iStar.setAttribute('title', seriesObj.title);
+//     iStar.setAttribute('type', seriesObj.type);
+//     iStar.setAttribute('year', yr);
+//     iStar.setAttribute('episodes', seriesObj.episodes);
+//     iStar.setAttribute('id', seriesObj.mal_id);
+//     iStar.setAttribute('img', seriesObj.image_url);
+
+//     butDiv.appendChild(iStar);
+
+//     $resultsList.appendChild($series50);
+//   }
+// }
+
 function buildAnime(searchResults, type) {
   $resultsList.replaceChildren();
-  for (var a = 0; a < searchResults.length; a++) {
-    var seriesObj = {};
+  for (let a = 0; a < searchResults.length; a++) {
+    let seriesObj = {};
     seriesObj = searchResults[a];
-    var $series50 = document.createElement('div');
+    const $series50 = document.createElement('div');
     $series50.className = 'series50';
 
-    var showImage = document.createElement('img');
+    const showImage = document.createElement('img');
     showImage.setAttribute('src', seriesObj.image_url);
     $series50.appendChild(showImage);
 
-    var titleDiv = document.createElement('div');
+    const titleDiv = document.createElement('div');
     titleDiv.textContent = seriesObj.title;
     $series50.appendChild(titleDiv);
 
-    var typeDiv = document.createElement('div');
+    const typeDiv = document.createElement('div');
     typeDiv.textContent = seriesObj.type;
     $series50.appendChild(typeDiv);
 
-    var yr;
-    var yearDiv = document.createElement('div');
+    let yr;
+    const yearDiv = document.createElement('div');
     if (type === 'term') {
-      var yearString = String(seriesObj.start_date);
+      let yearString = String(seriesObj.start_date);
       yearString = yearString.slice(0, 4);
       yearDiv.textContent = yearString;
       yr = yearString;
     } else {
-      var yearAirString = String(seriesObj.airing_start);
+      let yearAirString = String(seriesObj.airing_start);
       yearAirString = yearAirString.slice(0, 4);
       yearDiv.textContent = yearAirString;
       yr = yearAirString;
@@ -103,27 +180,27 @@ function buildAnime(searchResults, type) {
 
     $series50.appendChild(yearDiv);
 
-    var episodesDiv = document.createElement('div');
+    const episodesDiv = document.createElement('div');
     episodesDiv.textContent = 'Episode(s): ' + seriesObj.episodes;
     $series50.appendChild(episodesDiv);
 
-    var butDiv = document.createElement('div');
+    const butDiv = document.createElement('div');
     butDiv.className = 'butDiv';
     $series50.appendChild(butDiv);
 
-    var moreInfoButtonSpan = document.createElement('span');
+    const moreInfoButtonSpan = document.createElement('span');
     moreInfoButtonSpan.textContent = 'More Info';
     moreInfoButtonSpan.className = 'moreInfoButton';
     moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
     moreInfoButtonSpan.setAttribute('medium', 'anime');
     butDiv.appendChild(moreInfoButtonSpan);
 
-    var iStar = document.createElement('i');
+    const iStar = document.createElement('i');
     iStar.className = 'far fa-star';
-    var currentId = seriesObj.mal_id.toString();
+    const currentId = seriesObj.mal_id.toString();
 
-    for (var b = 0; b < data.animeIDs.length; b++) {
-      var currentCheckAgainst = data.animeIDs[b];
+    for (let b = 0; b < data.animeIDs.length; b++) {
+      const currentCheckAgainst = data.animeIDs[b];
 
       if (currentId === currentCheckAgainst) {
         iStar.className = 'fas fa-star';
