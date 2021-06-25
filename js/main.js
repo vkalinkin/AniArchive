@@ -221,29 +221,63 @@ function buildAnime(searchResults, type) {
   }
 }
 
+// function xhrReqAnime() {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var searchResults = xhr.response.results;
+//     buildAnime(searchResults, 'term');
+//   });
+
+//   xhr.send();
+// }
+
 function xhrReqAnime() {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var searchResults = xhr.response.results;
+    const searchResults = xhr.response.results;
     buildAnime(searchResults, 'term');
   });
 
   xhr.send();
 }
 
+// function xhrReqAnimeFiltered() {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var searchResults = xhr.response.results;
+//     var filteredResults = [];
+//     for (var a = 0; a < searchResults.length; a++) {
+//       var currentSeries = {};
+//       currentSeries = searchResults[a];
+//       if (currentSeries.rated !== 'Rx') {
+//         filteredResults.push(currentSeries);
+//       }
+//     }
+//     buildAnime(filteredResults, 'term');
+//   });
+
+//   xhr.send();
+// }
+
 function xhrReqAnimeFiltered() {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var searchResults = xhr.response.results;
-    var filteredResults = [];
-    for (var a = 0; a < searchResults.length; a++) {
-      var currentSeries = {};
+    const searchResults = xhr.response.results;
+    const filteredResults = [];
+    for (let a = 0; a < searchResults.length; a++) {
+      let currentSeries = {};
       currentSeries = searchResults[a];
       if (currentSeries.rated !== 'Rx') {
         filteredResults.push(currentSeries);
