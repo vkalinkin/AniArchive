@@ -68,6 +68,7 @@ let searchTerm = '';
 let season = '2021spring';
 
 function buildAnime(searchResults, type) {
+  $resultsList.replaceChildren();
   for (var a = 0; a < searchResults.length; a++) {
     var seriesObj = {};
     seriesObj = searchResults[a];
@@ -178,6 +179,7 @@ function xhrReqAnimeFiltered() {
 }
 
 function buildManga(searchResults) {
+  $resultsList.replaceChildren();
   for (var a = 0; a < searchResults.length; a++) {
     var seriesObj = {};
     seriesObj = searchResults[a];
@@ -562,8 +564,25 @@ function xhrReqIDManga(id) {
 }
 
 $termSearch.addEventListener('submit', function (event) {
-  event.preventDefault();
   $resultsList.replaceChildren();
+  event.preventDefault();
+
+  var loadingSpinner = document.createElement('div');
+  loadingSpinner.className = 'div lds-ring';
+  var div1 = document.createElement('div');
+  loadingSpinner.appendChild(div1);
+  var div2 = document.createElement('div');
+  loadingSpinner.appendChild(div2);
+  var div3 = document.createElement('div');
+  loadingSpinner.appendChild(div3);
+  var div4 = document.createElement('div');
+  loadingSpinner.appendChild(div4);
+  $resultsList.appendChild(loadingSpinner);
+
+  var loadingMessage = document.createElement('h3');
+  loadingMessage.textContent = 'Please wait. Results are loading... (make sure search term has at least 3 characters)';
+  $resultsList.appendChild(loadingMessage);
+
   searchTerm = $searchBox.value;
 
   if ($animeRadio.checked === true) {
@@ -594,8 +613,25 @@ $pastOrPresent.addEventListener('click', function () {
 });
 
 $seasonSearch.addEventListener('submit', function (event) {
-  event.preventDefault();
   $resultsList.replaceChildren();
+  var loadingSpinner = document.createElement('div');
+  loadingSpinner.className = 'div lds-ring';
+  var div1 = document.createElement('div');
+  loadingSpinner.appendChild(div1);
+  var div2 = document.createElement('div');
+  loadingSpinner.appendChild(div2);
+  var div3 = document.createElement('div');
+  loadingSpinner.appendChild(div3);
+  var div4 = document.createElement('div');
+  loadingSpinner.appendChild(div4);
+  $resultsList.appendChild(loadingSpinner);
+
+  var loadingMessage = document.createElement('h3');
+  loadingMessage.textContent = 'Please wait. Results are loading...';
+  $resultsList.appendChild(loadingMessage);
+
+  event.preventDefault();
+  // $resultsList.replaceChildren();
   if ($latestRadio.checked === true) {
     season = '2021spring';
   } else if ($previousRadio.checked === true) {
