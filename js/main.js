@@ -1,5 +1,6 @@
 /* global data */
 /* exported data */
+
 // var $resultsList = document.querySelector('.resultsList');
 // var $searchBox = document.querySelector('#searchBox');
 
@@ -512,28 +513,61 @@ function xhrReqMangaFiltered() {
 }
 
 function xhrReqSeason(year, seas) {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
 
-    var searchResults = xhr.response.anime;
+    const searchResults = xhr.response.anime;
     buildAnime(searchResults, 'season');
   });
   xhr.send();
 }
 
+// function xhrReqSeason(year, seas) {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+
+//     var searchResults = xhr.response.anime;
+//     buildAnime(searchResults, 'season');
+//   });
+//   xhr.send();
+// }
+
+// function xhrReqSeasonFiltered(year, seas) {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+//     var searchResults = xhr.response.anime;
+//     var filteredResults = [];
+//     for (var a = 0; a < searchResults.length; a++) {
+//       var currentSeries = {};
+//       currentSeries = searchResults[a];
+//       if (currentSeries.r18 === false) {
+//         filteredResults.push(currentSeries);
+//       }
+//     }
+//     buildAnime(filteredResults, 'season');
+//   });
+//   xhr.send();
+// }
+
 function xhrReqSeasonFiltered(year, seas) {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/season/' + year + '/' + seas);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var searchResults = xhr.response.anime;
-    var filteredResults = [];
-    for (var a = 0; a < searchResults.length; a++) {
-      var currentSeries = {};
+    const searchResults = xhr.response.anime;
+    const filteredResults = [];
+    for (let a = 0; a < searchResults.length; a++) {
+      let currentSeries = {};
       currentSeries = searchResults[a];
       if (currentSeries.r18 === false) {
         filteredResults.push(currentSeries);
@@ -545,71 +579,71 @@ function xhrReqSeasonFiltered(year, seas) {
 }
 
 function buildModalAnime(currentAnime) {
-  var modalData = document.createElement('div');
+  const modalData = document.createElement('div');
 
-  var modalTopDiv = document.createElement('div');
+  const modalTopDiv = document.createElement('div');
   modalTopDiv.className = 'modalTop row';
 
-  var imgSpan = document.createElement('span');
+  const imgSpan = document.createElement('span');
   modalTopDiv.appendChild(imgSpan);
 
-  var modalImg = document.createElement('img');
+  const modalImg = document.createElement('img');
   modalImg.setAttribute('src', currentAnime.image_url);
   modalImg.className = 'infoImg';
   imgSpan.appendChild(modalImg);
 
-  var textSpan = document.createElement('span');
+  const textSpan = document.createElement('span');
   textSpan.className = 'textSpan';
   modalTopDiv.appendChild(textSpan);
 
-  var titleDiv = document.createElement('div');
+  const titleDiv = document.createElement('div');
   titleDiv.textContent = currentAnime.title;
   titleDiv.className = 'infoRow';
   textSpan.appendChild(titleDiv);
 
-  var titleEngDiv = document.createElement('div');
+  const titleEngDiv = document.createElement('div');
   titleEngDiv.textContent = currentAnime.title_english;
   titleEngDiv.className = 'infoRow';
   textSpan.appendChild(titleEngDiv);
 
-  var yearDiv = document.createElement('div');
-  var airTimes = currentAnime.aired.from;
-  var year = airTimes.slice(0, 4);
+  const yearDiv = document.createElement('div');
+  const airTimes = currentAnime.aired.from;
+  const year = airTimes.slice(0, 4);
   yearDiv.textContent = year;
   yearDiv.className = 'infoRow';
   textSpan.appendChild(yearDiv);
 
-  var typeDiv = document.createElement('div');
+  const typeDiv = document.createElement('div');
   typeDiv.textContent = currentAnime.type;
   typeDiv.className = 'infoRow';
   textSpan.appendChild(typeDiv);
 
-  var episodesDiv = document.createElement('div');
+  const episodesDiv = document.createElement('div');
   episodesDiv.textContent = 'Episode(s): ' + currentAnime.episodes;
   episodesDiv.className = 'infoRow';
   textSpan.appendChild(episodesDiv);
 
-  var durationDiv = document.createElement('div');
+  const durationDiv = document.createElement('div');
   durationDiv.textContent = currentAnime.duration;
   durationDiv.className = 'infoRow';
   textSpan.appendChild(durationDiv);
 
-  var sourceDiv = document.createElement('div');
+  const sourceDiv = document.createElement('div');
   sourceDiv.textContent = 'Source: ' + currentAnime.source;
   sourceDiv.className = 'infoRow';
   textSpan.appendChild(sourceDiv);
 
-  var ratingDiv = document.createElement('div');
+  const ratingDiv = document.createElement('div');
   ratingDiv.textContent = 'Rated ' + currentAnime.rating;
   ratingDiv.className = 'infoRow';
   textSpan.appendChild(ratingDiv);
 
-  var studiosDiv = document.createElement('div');
-  var currentStudios = currentAnime.studios;
+  const studiosDiv = document.createElement('div');
+  const currentStudios = currentAnime.studios;
   studiosDiv.className = 'infoRow';
   studiosDiv.textContent = 'Studio(s): ';
-  for (var b = 0; b < currentStudios.length; b++) {
-    var curStudio = currentStudios[b];
+  for (let b = 0; b < currentStudios.length; b++) {
+    const curStudio = currentStudios[b];
     if (b === currentStudios.length - 1) {
       studiosDiv.textContent += curStudio.name;
     } else {
@@ -621,12 +655,12 @@ function buildModalAnime(currentAnime) {
 
   modalData.appendChild(modalTopDiv);
 
-  var genresDiv = document.createElement('div');
-  var currentGenres = currentAnime.genres;
+  const genresDiv = document.createElement('div');
+  const currentGenres = currentAnime.genres;
   genresDiv.className = 'infoRow';
   genresDiv.textContent = 'Genre(s): ';
-  for (var a = 0; a < currentGenres.length; a++) {
-    var curGenre = currentGenres[a];
+  for (let a = 0; a < currentGenres.length; a++) {
+    const curGenre = currentGenres[a];
     if (a === currentGenres.length - 1) {
       genresDiv.textContent += curGenre.name;
     } else {
@@ -635,15 +669,15 @@ function buildModalAnime(currentAnime) {
   }
   modalData.appendChild(genresDiv);
 
-  var synopDiv = document.createElement('div');
+  const synopDiv = document.createElement('div');
   synopDiv.textContent = 'Synopsis: ' + currentAnime.synopsis;
   synopDiv.className = 'infoRow synop';
   modalData.appendChild(synopDiv);
 
-  var modalBut = document.createElement('div');
+  const modalBut = document.createElement('div');
   modalBut.className = 'modalBut';
 
-  var modalOkButtonSpan = document.createElement('span');
+  const modalOkButtonSpan = document.createElement('span');
   modalOkButtonSpan.textContent = 'OK';
   modalOkButtonSpan.className = 'modalOkButton';
   modalBut.appendChild(modalOkButtonSpan);
@@ -654,12 +688,12 @@ function buildModalAnime(currentAnime) {
 }
 
 function xhrReqIDAnime(id) {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/anime/' + id);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var currentAnime = xhr.response;
+    const currentAnime = xhr.response;
     buildModalAnime(currentAnime);
   });
   xhr.send();
