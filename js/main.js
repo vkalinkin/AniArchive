@@ -945,19 +945,19 @@ $termSearch.addEventListener('submit', function (event) {
   $resultsList.replaceChildren();
   event.preventDefault();
 
-  var loadingSpinner = document.createElement('div');
+  const loadingSpinner = document.createElement('div');
   loadingSpinner.className = 'div lds-ring';
-  var div1 = document.createElement('div');
+  const div1 = document.createElement('div');
   loadingSpinner.appendChild(div1);
-  var div2 = document.createElement('div');
+  const div2 = document.createElement('div');
   loadingSpinner.appendChild(div2);
-  var div3 = document.createElement('div');
+  const div3 = document.createElement('div');
   loadingSpinner.appendChild(div3);
-  var div4 = document.createElement('div');
+  const div4 = document.createElement('div');
   loadingSpinner.appendChild(div4);
   $resultsList.appendChild(loadingSpinner);
 
-  var loadingMessage = document.createElement('h3');
+  const loadingMessage = document.createElement('h3');
   loadingMessage.textContent = 'Please wait. Results are loading... (make sure search term has at least 3 characters)';
   $resultsList.appendChild(loadingMessage);
 
@@ -982,6 +982,47 @@ $termSearch.addEventListener('submit', function (event) {
   }
 });
 
+// $termSearch.addEventListener('submit', function (event) {
+//   $resultsList.replaceChildren();
+//   event.preventDefault();
+
+//   var loadingSpinner = document.createElement('div');
+//   loadingSpinner.className = 'div lds-ring';
+//   var div1 = document.createElement('div');
+//   loadingSpinner.appendChild(div1);
+//   var div2 = document.createElement('div');
+//   loadingSpinner.appendChild(div2);
+//   var div3 = document.createElement('div');
+//   loadingSpinner.appendChild(div3);
+//   var div4 = document.createElement('div');
+//   loadingSpinner.appendChild(div4);
+//   $resultsList.appendChild(loadingSpinner);
+
+//   var loadingMessage = document.createElement('h3');
+//   loadingMessage.textContent = 'Please wait. Results are loading... (make sure search term has at least 3 characters)';
+//   $resultsList.appendChild(loadingMessage);
+
+//   searchTerm = $searchBox.value;
+
+//   if ($animeRadio.checked === true) {
+//     if ($radioYesFilter.checked === true) {
+//       xhrReqAnimeFiltered();
+//     } else if ($radioNoFilter.checked === true) {
+//       xhrReqAnime();
+//     }
+//     $resultsTitle.textContent = "Anime search results for term '" + searchTerm + "' :";
+
+//   } else if ($mangaRadio.checked === true) {
+
+//     if ($radioYesFilter.checked === true) {
+//       xhrReqMangaFiltered();
+//     } else if ($radioNoFilter.checked === true) {
+//       xhrReqManga();
+//     }
+//     $resultsTitle.textContent = "Manga search results for term '" + searchTerm + "' :";
+//   }
+// });
+
 $pastOrPresent.addEventListener('click', function () {
   if ($latestRadio.checked === true) {
     $dropDowns.className = 'row dropDowns hidden';
@@ -992,19 +1033,19 @@ $pastOrPresent.addEventListener('click', function () {
 
 $seasonSearch.addEventListener('submit', function (event) {
   $resultsList.replaceChildren();
-  var loadingSpinner = document.createElement('div');
+  const loadingSpinner = document.createElement('div');
   loadingSpinner.className = 'div lds-ring';
-  var div1 = document.createElement('div');
+  const div1 = document.createElement('div');
   loadingSpinner.appendChild(div1);
-  var div2 = document.createElement('div');
+  const div2 = document.createElement('div');
   loadingSpinner.appendChild(div2);
-  var div3 = document.createElement('div');
+  const div3 = document.createElement('div');
   loadingSpinner.appendChild(div3);
-  var div4 = document.createElement('div');
+  const div4 = document.createElement('div');
   loadingSpinner.appendChild(div4);
   $resultsList.appendChild(loadingSpinner);
 
-  var loadingMessage = document.createElement('h3');
+  const loadingMessage = document.createElement('h3');
   loadingMessage.textContent = 'Please wait. Results are loading...';
   $resultsList.appendChild(loadingMessage);
 
@@ -1013,13 +1054,13 @@ $seasonSearch.addEventListener('submit', function (event) {
   if ($latestRadio.checked === true) {
     season = '2021spring';
   } else if ($previousRadio.checked === true) {
-    var yr = $yearDropDown.value;
-    var sea = $seasonDropDown.value;
+    const yr = $yearDropDown.value;
+    const sea = $seasonDropDown.value;
     season = yr + sea;
   }
-  var year = season.slice(0, 4);
-  var seas = season.slice(4);
-  var cap = seas.charAt(0).toUpperCase() + seas.slice(1);
+  const year = season.slice(0, 4);
+  const seas = season.slice(4);
+  const cap = seas.charAt(0).toUpperCase() + seas.slice(1);
 
   if ($radioYesFilter.checked === true) {
     xhrReqSeasonFiltered(year, seas);
@@ -1028,6 +1069,45 @@ $seasonSearch.addEventListener('submit', function (event) {
   }
   $resultsTitle.textContent = 'Season search results for ' + cap + ' ' + year + ':';
 });
+
+// $seasonSearch.addEventListener('submit', function (event) {
+//   $resultsList.replaceChildren();
+//   var loadingSpinner = document.createElement('div');
+//   loadingSpinner.className = 'div lds-ring';
+//   var div1 = document.createElement('div');
+//   loadingSpinner.appendChild(div1);
+//   var div2 = document.createElement('div');
+//   loadingSpinner.appendChild(div2);
+//   var div3 = document.createElement('div');
+//   loadingSpinner.appendChild(div3);
+//   var div4 = document.createElement('div');
+//   loadingSpinner.appendChild(div4);
+//   $resultsList.appendChild(loadingSpinner);
+
+//   var loadingMessage = document.createElement('h3');
+//   loadingMessage.textContent = 'Please wait. Results are loading...';
+//   $resultsList.appendChild(loadingMessage);
+
+//   event.preventDefault();
+//   // $resultsList.replaceChildren();
+//   if ($latestRadio.checked === true) {
+//     season = '2021spring';
+//   } else if ($previousRadio.checked === true) {
+//     var yr = $yearDropDown.value;
+//     var sea = $seasonDropDown.value;
+//     season = yr + sea;
+//   }
+//   var year = season.slice(0, 4);
+//   var seas = season.slice(4);
+//   var cap = seas.charAt(0).toUpperCase() + seas.slice(1);
+
+//   if ($radioYesFilter.checked === true) {
+//     xhrReqSeasonFiltered(year, seas);
+//   } else {
+//     xhrReqSeason(year, seas);
+//   }
+//   $resultsTitle.textContent = 'Season search results for ' + cap + ' ' + year + ':';
+// });
 
 $searchSelect.addEventListener('click', function (event) {
   event.preventDefault();
