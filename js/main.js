@@ -700,61 +700,61 @@ function xhrReqIDAnime(id) {
 }
 
 function buildModalManga(currentManga) {
-  var modalTopDiv = document.createElement('div');
+  const modalTopDiv = document.createElement('div');
   modalTopDiv.className = 'modalTop row';
 
-  var imgSpan = document.createElement('span');
+  const imgSpan = document.createElement('span');
   modalTopDiv.appendChild(imgSpan);
 
-  var modalImg = document.createElement('img');
+  const modalImg = document.createElement('img');
   modalImg.setAttribute('src', currentManga.image_url);
   modalImg.className = 'infoImg';
   imgSpan.appendChild(modalImg);
 
-  var textSpan = document.createElement('span');
+  const textSpan = document.createElement('span');
   textSpan.className = 'textSpan';
   modalTopDiv.appendChild(textSpan);
 
-  var titleDiv = document.createElement('div');
+  const titleDiv = document.createElement('div');
   titleDiv.textContent = currentManga.title;
   titleDiv.className = 'infoRow';
   textSpan.appendChild(titleDiv);
 
-  var titleEngDiv = document.createElement('div');
+  const titleEngDiv = document.createElement('div');
   titleEngDiv.textContent = currentManga.title_english;
   titleEngDiv.className = 'infoRow';
   textSpan.appendChild(titleEngDiv);
 
-  var yearDiv = document.createElement('div');
+  const yearDiv = document.createElement('div');
   yearDiv.className = 'infoRow';
   if (currentManga.published.from === null) {
     yearDiv.textContent = 'Unknown date';
   } else {
-    var pub = currentManga.published;
-    var fromPub = pub.from;
-    var year = fromPub.slice(0, 4);
+    const pub = currentManga.published;
+    const fromPub = pub.from;
+    const year = fromPub.slice(0, 4);
     yearDiv.textContent = year;
   }
   textSpan.appendChild(yearDiv);
 
-  var typeDiv = document.createElement('div');
+  const typeDiv = document.createElement('div');
   typeDiv.textContent = currentManga.type;
   typeDiv.className = 'infoRow';
   textSpan.appendChild(typeDiv);
 
-  var chaptersDiv = document.createElement('div');
+  const chaptersDiv = document.createElement('div');
   chaptersDiv.textContent = 'Chapter(s): ' + currentManga.chapters;
   chaptersDiv.className = 'infoRow';
   textSpan.appendChild(chaptersDiv);
 
-  var authorDiv = document.createElement('div');
+  const authorDiv = document.createElement('div');
   authorDiv.className = 'infoRow';
-  var currentAuthors = currentManga.authors;
+  const currentAuthors = currentManga.authors;
 
   authorDiv.textContent = 'Author(s): ';
-  for (var b = 0; b < currentAuthors.length; b++) {
-    var curAuthor = currentAuthors[b];
-    var author = curAuthor.name;
+  for (let b = 0; b < currentAuthors.length; b++) {
+    const curAuthor = currentAuthors[b];
+    const author = curAuthor.name;
     if (b === currentAuthors.length - 1) {
       authorDiv.textContent += author;
     } else {
@@ -764,24 +764,24 @@ function buildModalManga(currentManga) {
   }
   textSpan.appendChild(authorDiv);
 
-  var serialDiv = document.createElement('div');
-  var currentSerial = currentManga.serializations;
+  const serialDiv = document.createElement('div');
+  const currentSerial = currentManga.serializations;
   serialDiv.className = 'infoRow';
   serialDiv.textContent = 'Serialization(s): ';
-  for (var c = 0; c < currentSerial.length; c++) {
-    var serial = currentSerial[c].name;
+  for (let c = 0; c < currentSerial.length; c++) {
+    const serial = currentSerial[c].name;
     serialDiv.textContent += serial + ' ';
   }
   textSpan.appendChild(serialDiv);
 
   $modalContent.appendChild(modalTopDiv);
 
-  var genresDiv = document.createElement('div');
+  const genresDiv = document.createElement('div');
   genresDiv.className = 'infoRow';
-  var currentGenres = currentManga.genres;
+  const currentGenres = currentManga.genres;
   genresDiv.textContent = 'Genre(s): ';
-  for (var a = 0; a < currentGenres.length; a++) {
-    var curGenre = currentGenres[a];
+  for (let a = 0; a < currentGenres.length; a++) {
+    const curGenre = currentGenres[a];
     if (a === currentGenres.length - 1) {
       genresDiv.textContent += curGenre.name;
     } else {
@@ -790,15 +790,15 @@ function buildModalManga(currentManga) {
   }
   $modalContent.appendChild(genresDiv);
 
-  var synopDiv = document.createElement('div');
+  const synopDiv = document.createElement('div');
   synopDiv.textContent = 'Synopsis: ' + currentManga.synopsis;
   synopDiv.className = 'infoRow synop';
   $modalContent.appendChild(synopDiv);
 
-  var modalBut = document.createElement('div');
+  const modalBut = document.createElement('div');
   modalBut.className = 'modalBut';
 
-  var modalOkButtonSpan = document.createElement('span');
+  const modalOkButtonSpan = document.createElement('span');
   modalOkButtonSpan.textContent = 'OK';
   modalOkButtonSpan.className = 'modalOkButton';
   modalBut.appendChild(modalOkButtonSpan);
@@ -807,14 +807,135 @@ function buildModalManga(currentManga) {
 
 }
 
+// function buildModalManga(currentManga) {
+//   var modalTopDiv = document.createElement('div');
+//   modalTopDiv.className = 'modalTop row';
+
+//   var imgSpan = document.createElement('span');
+//   modalTopDiv.appendChild(imgSpan);
+
+//   var modalImg = document.createElement('img');
+//   modalImg.setAttribute('src', currentManga.image_url);
+//   modalImg.className = 'infoImg';
+//   imgSpan.appendChild(modalImg);
+
+//   var textSpan = document.createElement('span');
+//   textSpan.className = 'textSpan';
+//   modalTopDiv.appendChild(textSpan);
+
+//   var titleDiv = document.createElement('div');
+//   titleDiv.textContent = currentManga.title;
+//   titleDiv.className = 'infoRow';
+//   textSpan.appendChild(titleDiv);
+
+//   var titleEngDiv = document.createElement('div');
+//   titleEngDiv.textContent = currentManga.title_english;
+//   titleEngDiv.className = 'infoRow';
+//   textSpan.appendChild(titleEngDiv);
+
+//   var yearDiv = document.createElement('div');
+//   yearDiv.className = 'infoRow';
+//   if (currentManga.published.from === null) {
+//     yearDiv.textContent = 'Unknown date';
+//   } else {
+//     var pub = currentManga.published;
+//     var fromPub = pub.from;
+//     var year = fromPub.slice(0, 4);
+//     yearDiv.textContent = year;
+//   }
+//   textSpan.appendChild(yearDiv);
+
+//   var typeDiv = document.createElement('div');
+//   typeDiv.textContent = currentManga.type;
+//   typeDiv.className = 'infoRow';
+//   textSpan.appendChild(typeDiv);
+
+//   var chaptersDiv = document.createElement('div');
+//   chaptersDiv.textContent = 'Chapter(s): ' + currentManga.chapters;
+//   chaptersDiv.className = 'infoRow';
+//   textSpan.appendChild(chaptersDiv);
+
+//   var authorDiv = document.createElement('div');
+//   authorDiv.className = 'infoRow';
+//   var currentAuthors = currentManga.authors;
+
+//   authorDiv.textContent = 'Author(s): ';
+//   for (var b = 0; b < currentAuthors.length; b++) {
+//     var curAuthor = currentAuthors[b];
+//     var author = curAuthor.name;
+//     if (b === currentAuthors.length - 1) {
+//       authorDiv.textContent += author;
+//     } else {
+//       authorDiv.textContent += author + ' | ';
+//     }
+
+//   }
+//   textSpan.appendChild(authorDiv);
+
+//   var serialDiv = document.createElement('div');
+//   var currentSerial = currentManga.serializations;
+//   serialDiv.className = 'infoRow';
+//   serialDiv.textContent = 'Serialization(s): ';
+//   for (var c = 0; c < currentSerial.length; c++) {
+//     var serial = currentSerial[c].name;
+//     serialDiv.textContent += serial + ' ';
+//   }
+//   textSpan.appendChild(serialDiv);
+
+//   $modalContent.appendChild(modalTopDiv);
+
+//   var genresDiv = document.createElement('div');
+//   genresDiv.className = 'infoRow';
+//   var currentGenres = currentManga.genres;
+//   genresDiv.textContent = 'Genre(s): ';
+//   for (var a = 0; a < currentGenres.length; a++) {
+//     var curGenre = currentGenres[a];
+//     if (a === currentGenres.length - 1) {
+//       genresDiv.textContent += curGenre.name;
+//     } else {
+//       genresDiv.textContent += curGenre.name + ', ';
+//     }
+//   }
+//   $modalContent.appendChild(genresDiv);
+
+//   var synopDiv = document.createElement('div');
+//   synopDiv.textContent = 'Synopsis: ' + currentManga.synopsis;
+//   synopDiv.className = 'infoRow synop';
+//   $modalContent.appendChild(synopDiv);
+
+//   var modalBut = document.createElement('div');
+//   modalBut.className = 'modalBut';
+
+//   var modalOkButtonSpan = document.createElement('span');
+//   modalOkButtonSpan.textContent = 'OK';
+//   modalOkButtonSpan.className = 'modalOkButton';
+//   modalBut.appendChild(modalOkButtonSpan);
+
+//   $modalContent.appendChild(modalBut);
+
+// }
+
+// function xhrReqIDManga(id) {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/manga/' + id);
+//   xhr.setRequestHeader('token', 'abc123');
+//   xhr.responseType = 'json';
+//   xhr.addEventListener('load', function () {
+
+//     var currentManga = xhr.response;
+//     buildModalManga(currentManga);
+//   });
+//   xhr.send();
+// }
+
 function xhrReqIDManga(id) {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/manga/' + id);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
 
-    var currentManga = xhr.response;
+    const currentManga = xhr.response;
     buildModalManga(currentManga);
   });
   xhr.send();
