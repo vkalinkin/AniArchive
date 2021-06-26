@@ -1130,8 +1130,8 @@ $resultsList.addEventListener('click', function (event) {
   if (event.target.className === 'moreInfoButton') {
     $modalContent.replaceChildren();
     $modal.className = 'modal';
-    var currentMedium = event.target.getAttribute('medium');
-    var currentId = event.target.getAttribute('id');
+    const currentMedium = event.target.getAttribute('medium');
+    const currentId = event.target.getAttribute('id');
     if (currentMedium === 'anime') {
       xhrReqIDAnime(currentId);
     } else if (currentMedium === 'manga') {
@@ -1139,7 +1139,7 @@ $resultsList.addEventListener('click', function (event) {
     }
   }
   if (event.target.className === 'far fa-star') {
-    var newFave = {};
+    const newFave = {};
     newFave.type = event.target.getAttribute('type');
     newFave.id = event.target.getAttribute('id');
     newFave.title = event.target.getAttribute('title');
@@ -1160,12 +1160,12 @@ $resultsList.addEventListener('click', function (event) {
     event.target.className = 'fas fa-star';
 
   } else if (event.target.className === 'fas fa-star') {
-    var oldFave = {};
+    const oldFave = {};
     oldFave.type = event.target.getAttribute('type');
     oldFave.id = event.target.getAttribute('id');
-    var oldFaveIndex;
-    for (var a = 0; a < data.faves.length; a++) {
-      var currentFave = {};
+    let oldFaveIndex;
+    for (let a = 0; a < data.faves.length; a++) {
+      let currentFave = {};
       currentFave = data.faves[a];
       if (oldFave.id === currentFave.id) {
         if (oldFave.type === currentFave.type) {
@@ -1178,11 +1178,12 @@ $resultsList.addEventListener('click', function (event) {
 
     if (oldFave.type === 'Manga' || oldFave.type === 'Light Novel' || oldFave.type === 'One-shot' || oldFave.type === 'Manhwa' ||
       oldFave.type === 'Manhua' || oldFave.type === 'Doujinshi' || oldFave.type === 'Novel') {
-      var oldMangaId;
-      oldMangaId = oldFave.id;
-      var oldMangaIndex;
-      var currentMangaID;
-      for (var b = 0; b < data.mangaIDs.length; b++) {
+      // const oldMangaId;
+      // oldMangaId = oldFave.id;
+      const oldMangaId = oldFave.id;
+      let oldMangaIndex;
+      let currentMangaID;
+      for (let b = 0; b < data.mangaIDs.length; b++) {
         currentMangaID = data.mangaIDs[b];
         if (oldMangaId === currentMangaID) {
           oldMangaIndex = b;
@@ -1209,6 +1210,187 @@ $resultsList.addEventListener('click', function (event) {
   }
 });
 
+// $resultsList.addEventListener('click', function (event) {
+
+//   if (event.target.className === 'moreInfoButton') {
+//     $modalContent.replaceChildren();
+//     $modal.className = 'modal';
+//     var currentMedium = event.target.getAttribute('medium');
+//     var currentId = event.target.getAttribute('id');
+//     if (currentMedium === 'anime') {
+//       xhrReqIDAnime(currentId);
+//     } else if (currentMedium === 'manga') {
+//       xhrReqIDManga(currentId);
+//     }
+//   }
+//   if (event.target.className === 'far fa-star') {
+//     var newFave = {};
+//     newFave.type = event.target.getAttribute('type');
+//     newFave.id = event.target.getAttribute('id');
+//     newFave.title = event.target.getAttribute('title');
+//     newFave.year = event.target.getAttribute('year');
+//     newFave.img = event.target.getAttribute('img');
+
+//     if (newFave.type === 'Manga' || newFave.type === 'Light Novel' || newFave.type === 'One-shot' || newFave.type === 'Manhwa' ||
+//       newFave.type === 'Manhua' || newFave.type === 'Doujinshi' || newFave.type === 'Novel') {
+//       newFave.chapters = event.target.getAttribute('chapters');
+//       data.mangaIDs.push(event.target.getAttribute('id'));
+//     } else {
+//       newFave.episodes = event.target.getAttribute('episodes');
+//       data.animeIDs.push(event.target.getAttribute('id'));
+//     }
+
+//     data.faves.push(newFave);
+
+//     event.target.className = 'fas fa-star';
+
+//   } else if (event.target.className === 'fas fa-star') {
+//     var oldFave = {};
+//     oldFave.type = event.target.getAttribute('type');
+//     oldFave.id = event.target.getAttribute('id');
+//     var oldFaveIndex;
+//     for (var a = 0; a < data.faves.length; a++) {
+//       var currentFave = {};
+//       currentFave = data.faves[a];
+//       if (oldFave.id === currentFave.id) {
+//         if (oldFave.type === currentFave.type) {
+//           oldFaveIndex = a;
+//           break;
+//         }
+//       }
+//     }
+//     data.faves.splice(oldFaveIndex, 1);
+
+//     if (oldFave.type === 'Manga' || oldFave.type === 'Light Novel' || oldFave.type === 'One-shot' || oldFave.type === 'Manhwa' ||
+//       oldFave.type === 'Manhua' || oldFave.type === 'Doujinshi' || oldFave.type === 'Novel') {
+//       var oldMangaId;
+//       oldMangaId = oldFave.id;
+//       var oldMangaIndex;
+//       var currentMangaID;
+//       for (var b = 0; b < data.mangaIDs.length; b++) {
+//         currentMangaID = data.mangaIDs[b];
+//         if (oldMangaId === currentMangaID) {
+//           oldMangaIndex = b;
+//           break;
+//         }
+//       }
+//       data.mangaIDs.splice(oldMangaIndex, 1);
+//     } else {
+//       var oldAnimeId;
+//       oldAnimeId = oldFave.id;
+//       var oldAnimeIndex;
+//       var currentAnimeID;
+//       for (var c = 0; c < data.animeIDs.length; c++) {
+//         currentAnimeID = data.animeIDs[c];
+//         if (oldAnimeId === currentAnimeID) {
+//           oldAnimeIndex = c;
+//           break;
+//         }
+//       }
+//       data.animeIDs.splice(oldAnimeIndex, 1);
+//     }
+
+//     event.target.className = 'far fa-star';
+//   }
+// });
+
+// $modalContent.addEventListener('click', function (event) {
+//   if (event.target.className === 'modalOkButton') {
+//     $modal.className = 'modal hidden';
+//   }
+// });
+
+// $myList.addEventListener('click', function (event) {
+//   $searches.className = 'row searches hidden';
+//   $resultsTitle.textContent = 'Current favorites in My List:';
+//   $resultsList.replaceChildren();
+
+//   for (var a = 0; a < data.faves.length; a++) {
+//     var seriesObj = {};
+//     seriesObj = data.faves[a];
+//     var $series50 = document.createElement('div');
+//     $series50.className = 'div series50';
+
+//     var showImage = document.createElement('img');
+//     showImage.setAttribute('src', seriesObj.img);
+//     $series50.appendChild(showImage);
+
+//     var titleDiv = document.createElement('div');
+//     titleDiv.textContent = seriesObj.title;
+//     $series50.appendChild(titleDiv);
+
+//     var typeDiv = document.createElement('div');
+//     typeDiv.textContent = seriesObj.type;
+//     $series50.appendChild(typeDiv);
+
+//     var yearDiv = document.createElement('div');
+//     yearDiv.textContent = seriesObj.year;
+//     $series50.appendChild(yearDiv);
+
+//     if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+//       seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+//       var chaptersDiv = document.createElement('div');
+//       chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
+//       $series50.appendChild(chaptersDiv);
+//     } else {
+//       var episodesDiv = document.createElement('div');
+//       episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
+//       $series50.appendChild(episodesDiv);
+//     }
+
+//     var butDiv = document.createElement('div');
+//     butDiv.className = 'butDiv';
+//     $series50.appendChild(butDiv);
+
+//     var moreInfoButtonSpan = document.createElement('span');
+//     moreInfoButtonSpan.textContent = 'More Info';
+//     moreInfoButtonSpan.className = 'moreInfoButton';
+//     moreInfoButtonSpan.setAttribute('id', seriesObj.id);
+
+//     if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+//       seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+//       moreInfoButtonSpan.setAttribute('medium', 'manga');
+//     } else {
+//       moreInfoButtonSpan.setAttribute('medium', 'anime');
+//     }
+
+//     butDiv.appendChild(moreInfoButtonSpan);
+
+//     var iStar = document.createElement('i');
+//     iStar.className = 'fas fa-star';
+
+//     if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+//       seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+//       iStar.setAttribute('title', seriesObj.title);
+//       iStar.setAttribute('type', seriesObj.type);
+//       iStar.setAttribute('year', seriesObj.year);
+//       iStar.setAttribute('chapters', seriesObj.chapters);
+//       iStar.setAttribute('id', seriesObj.id);
+//       iStar.setAttribute('img', seriesObj.img);
+//     } else {
+//       iStar.setAttribute('title', seriesObj.title);
+//       iStar.setAttribute('type', seriesObj.type);
+//       iStar.setAttribute('year', seriesObj.year);
+//       iStar.setAttribute('episodes', seriesObj.episodes);
+//       iStar.setAttribute('id', seriesObj.id);
+//       iStar.setAttribute('img', seriesObj.img);
+//     }
+
+//     butDiv.appendChild(iStar);
+
+//     $resultsList.appendChild($series50);
+
+//     $myList.className = 'myList active';
+//     $goSearchBut.className = 'goSearchBut inactive';
+//   }
+// });
+
+// $goSearchBut.addEventListener('click', function (event) {
+//   $searches.className = 'row searches';
+//   $myList.className = 'myList inactive';
+//   $goSearchBut.className = 'goSearchBut active';
+// });
+
 $modalContent.addEventListener('click', function (event) {
   if (event.target.className === 'modalOkButton') {
     $modal.className = 'modal hidden';
@@ -1220,44 +1402,44 @@ $myList.addEventListener('click', function (event) {
   $resultsTitle.textContent = 'Current favorites in My List:';
   $resultsList.replaceChildren();
 
-  for (var a = 0; a < data.faves.length; a++) {
-    var seriesObj = {};
+  for (let a = 0; a < data.faves.length; a++) {
+    let seriesObj = {};
     seriesObj = data.faves[a];
-    var $series50 = document.createElement('div');
+    const $series50 = document.createElement('div');
     $series50.className = 'div series50';
 
-    var showImage = document.createElement('img');
+    const showImage = document.createElement('img');
     showImage.setAttribute('src', seriesObj.img);
     $series50.appendChild(showImage);
 
-    var titleDiv = document.createElement('div');
+    const titleDiv = document.createElement('div');
     titleDiv.textContent = seriesObj.title;
     $series50.appendChild(titleDiv);
 
-    var typeDiv = document.createElement('div');
+    const typeDiv = document.createElement('div');
     typeDiv.textContent = seriesObj.type;
     $series50.appendChild(typeDiv);
 
-    var yearDiv = document.createElement('div');
+    const yearDiv = document.createElement('div');
     yearDiv.textContent = seriesObj.year;
     $series50.appendChild(yearDiv);
 
     if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
       seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
-      var chaptersDiv = document.createElement('div');
+      const chaptersDiv = document.createElement('div');
       chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
       $series50.appendChild(chaptersDiv);
     } else {
-      var episodesDiv = document.createElement('div');
+      const episodesDiv = document.createElement('div');
       episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
       $series50.appendChild(episodesDiv);
     }
 
-    var butDiv = document.createElement('div');
+    const butDiv = document.createElement('div');
     butDiv.className = 'butDiv';
     $series50.appendChild(butDiv);
 
-    var moreInfoButtonSpan = document.createElement('span');
+    const moreInfoButtonSpan = document.createElement('span');
     moreInfoButtonSpan.textContent = 'More Info';
     moreInfoButtonSpan.className = 'moreInfoButton';
     moreInfoButtonSpan.setAttribute('id', seriesObj.id);
@@ -1271,7 +1453,7 @@ $myList.addEventListener('click', function (event) {
 
     butDiv.appendChild(moreInfoButtonSpan);
 
-    var iStar = document.createElement('i');
+    const iStar = document.createElement('i');
     iStar.className = 'fas fa-star';
 
     if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
