@@ -58,10 +58,16 @@ function buildAnime(searchResults, type) {
     let yr;
     const yearDiv = document.createElement('div');
     if (type === 'term') {
-      let yearString = String(seriesObj.start_date);
-      yearString = yearString.slice(0, 4);
-      yearDiv.textContent = yearString;
-      yr = yearString;
+      if (seriesObj.start_date === null) {
+        yearDiv.textContent = 'Unknown date';
+        yr = null;
+      } else {
+        let yearString = String(seriesObj.start_date);
+        yearString = yearString.slice(0, 4);
+        yearDiv.textContent = yearString;
+        yr = yearString;
+      }
+
     } else {
       let yearAirString = String(seriesObj.airing_start);
       yearAirString = yearAirString.slice(0, 4);
@@ -317,8 +323,13 @@ function buildModalAnime(currentAnime) {
 
   const yearDiv = document.createElement('div');
   const airTimes = currentAnime.aired.from;
-  const year = airTimes.slice(0, 4);
-  yearDiv.textContent = year;
+  if (airTimes === null) {
+    yearDiv.textContent = 'Unknown date';
+  } else {
+    const year = airTimes.slice(0, 4);
+    yearDiv.textContent = year;
+  }
+
   yearDiv.className = 'infoRow';
   textSpan.appendChild(yearDiv);
 
