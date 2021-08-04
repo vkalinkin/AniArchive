@@ -191,14 +191,14 @@ button {
   overflow: auto;
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 625px) {
   .synop {
     max-height: 350px;
     overflow: auto;
   }
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 625px) {
   .infoImg {
     width: 100%;
   }

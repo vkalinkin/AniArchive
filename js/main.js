@@ -151,74 +151,81 @@ function xhrReqAnimeFiltered() {
 
 function buildManga(searchResults) {
   $resultsList.replaceChildren();
-  for (let a = 0; a < searchResults.length; a++) {
-    let seriesObj = {};
-    seriesObj = searchResults[a];
-    const $series50 = document.createElement('div');
-    $series50.className = 'div series50';
+  if (searchResults === undefined || searchResults.length === 0) {
+    const noResults = document.createElement('div');
+    noResults.textContent = 'Sorry, no results found for ' + searchTerm + ', try a different term.';
+    $resultsList.appendChild(noResults);
+  } else {
+    for (let a = 0; a < searchResults.length; a++) {
+      let seriesObj = {};
+      seriesObj = searchResults[a];
+      const $series50 = document.createElement('div');
+      $series50.className = 'div series50';
 
-    const showImage = document.createElement('img');
-    showImage.setAttribute('src', seriesObj.images.jpg.image_url);
-    $series50.appendChild(showImage);
+      const showImage = document.createElement('img');
+      showImage.setAttribute('src', seriesObj.images.jpg.image_url);
+      $series50.appendChild(showImage);
 
-    const titleDiv = document.createElement('div');
-    titleDiv.textContent = seriesObj.title;
-    $series50.appendChild(titleDiv);
+      const titleDiv = document.createElement('div');
+      titleDiv.textContent = seriesObj.title;
+      $series50.appendChild(titleDiv);
 
-    const typeDiv = document.createElement('div');
-    typeDiv.textContent = seriesObj.type;
-    $series50.appendChild(typeDiv);
+      const typeDiv = document.createElement('div');
+      typeDiv.textContent = seriesObj.type;
+      $series50.appendChild(typeDiv);
 
-    let yearPub;
-    const yearDiv = document.createElement('div');
-    if (seriesObj.published.from === null) {
-      yearDiv.textContent = 'Unknown date';
-    } else {
-      let yearString = String(seriesObj.published.from);
-      yearString = yearString.slice(0, 4);
-      yearDiv.textContent = yearString;
-      yearPub = yearString;
-    }
-    $series50.appendChild(yearDiv);
-
-    const chaptersDiv = document.createElement('div');
-    chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
-    $series50.appendChild(chaptersDiv);
-
-    const butDiv = document.createElement('div');
-    butDiv.className = 'butDiv';
-    $series50.appendChild(butDiv);
-
-    const moreInfoButtonSpan = document.createElement('span');
-    moreInfoButtonSpan.textContent = 'More Info';
-    moreInfoButtonSpan.className = 'moreInfoButton';
-    moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
-    moreInfoButtonSpan.setAttribute('medium', 'manga');
-    butDiv.appendChild(moreInfoButtonSpan);
-
-    const iStar = document.createElement('i');
-    iStar.className = 'far fa-star';
-    const currentId = seriesObj.mal_id.toString();
-
-    for (let b = 0; b < data.mangaIDs.length; b++) {
-      const currentCheckAgainst = data.mangaIDs[b];
-
-      if (currentId === currentCheckAgainst) {
-        iStar.className = 'fas fa-star';
-        break;
+      let yearPub;
+      const yearDiv = document.createElement('div');
+      if (seriesObj.published.from === null) {
+        yearDiv.textContent = 'Unknown date';
+      } else {
+        let yearString = String(seriesObj.published.from);
+        yearString = yearString.slice(0, 4);
+        yearDiv.textContent = yearString;
+        yearPub = yearString;
       }
+      $series50.appendChild(yearDiv);
+
+      const chaptersDiv = document.createElement('div');
+      chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
+      $series50.appendChild(chaptersDiv);
+
+      const butDiv = document.createElement('div');
+      butDiv.className = 'butDiv';
+      $series50.appendChild(butDiv);
+
+      const moreInfoButtonSpan = document.createElement('span');
+      moreInfoButtonSpan.textContent = 'More Info';
+      moreInfoButtonSpan.className = 'moreInfoButton';
+      moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('medium', 'manga');
+      butDiv.appendChild(moreInfoButtonSpan);
+
+      const iStar = document.createElement('i');
+      iStar.className = 'far fa-star';
+      const currentId = seriesObj.mal_id.toString();
+
+      for (let b = 0; b < data.mangaIDs.length; b++) {
+        const currentCheckAgainst = data.mangaIDs[b];
+
+        if (currentId === currentCheckAgainst) {
+          iStar.className = 'fas fa-star';
+          break;
+        }
+      }
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', yearPub);
+      iStar.setAttribute('chapters', seriesObj.chapters);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.images.jpg.image_url);
+
+      butDiv.appendChild(iStar);
+
+      $resultsList.appendChild($series50);
     }
-    iStar.setAttribute('title', seriesObj.title);
-    iStar.setAttribute('type', seriesObj.type);
-    iStar.setAttribute('year', yearPub);
-    iStar.setAttribute('chapters', seriesObj.chapters);
-    iStar.setAttribute('id', seriesObj.mal_id);
-    iStar.setAttribute('img', seriesObj.images.jpg.image_url);
-
-    butDiv.appendChild(iStar);
-
-    $resultsList.appendChild($series50);
   }
+
 }
 
 function xhrReqManga() {

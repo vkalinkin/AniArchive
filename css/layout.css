@@ -114,4 +114,6 @@
   width: 95%;
   padding: 12px;
   border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: scroll;
 }
