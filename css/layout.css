@@ -117,3 +117,9 @@
   max-height: 90vh;
   overflow-y: scroll;
 }
+
+@media screen and (min-width: 742px) {
+  .modalContent {
+    overflow-y: hidden;
+  }
+}
