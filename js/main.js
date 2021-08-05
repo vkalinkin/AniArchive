@@ -307,8 +307,6 @@ function xhrReqSeason(year, seas) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     const searchResults = xhr.response.anime;
-    // searchResults.addEvent
-    // Listener("error")
     buildAnime(searchResults, 'season');
   });
   xhr.addEventListener('error', function () {
