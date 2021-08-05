@@ -114,4 +114,12 @@
   width: 95%;
   padding: 12px;
   border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 960px) {
+  .modalContent {
+    overflow-y: hidden;
+  }
 }

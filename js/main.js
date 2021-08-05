@@ -33,88 +33,96 @@ const $radioNoFilter = document.querySelector('#noFilter');
 const $resultsTitle = document.querySelector('.resultsTitle');
 
 let searchTerm = '';
-let season = '2021spring';
+
+let season = '2021summer';
 
 function buildAnime(searchResults, type) {
   $resultsList.replaceChildren();
-  for (let a = 0; a < searchResults.length; a++) {
-    let seriesObj = {};
-    seriesObj = searchResults[a];
-    const $series50 = document.createElement('div');
-    $series50.className = 'series50';
+  if (searchResults === undefined || searchResults.length === 0) {
+    const noResults = document.createElement('h3');
+    noResults.textContent = 'Sorry, no results found for ' + searchTerm + ', try a different term.';
+    $resultsList.appendChild(noResults);
+  } else {
+    for (let a = 0; a < searchResults.length; a++) {
+      let seriesObj = {};
+      seriesObj = searchResults[a];
+      const $series50 = document.createElement('div');
+      $series50.className = 'series50';
 
-    const showImage = document.createElement('img');
-    showImage.setAttribute('src', seriesObj.image_url);
-    $series50.appendChild(showImage);
+      const showImage = document.createElement('img');
+      showImage.setAttribute('src', seriesObj.image_url);
+      $series50.appendChild(showImage);
 
-    const titleDiv = document.createElement('div');
-    titleDiv.textContent = seriesObj.title;
-    $series50.appendChild(titleDiv);
+      const titleDiv = document.createElement('div');
+      titleDiv.textContent = seriesObj.title;
+      $series50.appendChild(titleDiv);
 
-    const typeDiv = document.createElement('div');
-    typeDiv.textContent = seriesObj.type;
-    $series50.appendChild(typeDiv);
+      const typeDiv = document.createElement('div');
+      typeDiv.textContent = seriesObj.type;
+      $series50.appendChild(typeDiv);
 
-    let yr;
-    const yearDiv = document.createElement('div');
-    if (type === 'term') {
-      if (seriesObj.start_date === null) {
-        yearDiv.textContent = 'Unknown date';
-        yr = null;
+      let yr;
+      const yearDiv = document.createElement('div');
+      if (type === 'term') {
+        if (seriesObj.start_date === null) {
+          yearDiv.textContent = 'Unknown date';
+          yr = null;
+        } else {
+          let yearString = String(seriesObj.start_date);
+          yearString = yearString.slice(0, 4);
+          yearDiv.textContent = yearString;
+          yr = yearString;
+        }
+
       } else {
-        let yearString = String(seriesObj.start_date);
-        yearString = yearString.slice(0, 4);
-        yearDiv.textContent = yearString;
-        yr = yearString;
+        let yearAirString = String(seriesObj.airing_start);
+        yearAirString = yearAirString.slice(0, 4);
+        yearDiv.textContent = yearAirString;
+        yr = yearAirString;
       }
 
-    } else {
-      let yearAirString = String(seriesObj.airing_start);
-      yearAirString = yearAirString.slice(0, 4);
-      yearDiv.textContent = yearAirString;
-      yr = yearAirString;
-    }
+      $series50.appendChild(yearDiv);
 
-    $series50.appendChild(yearDiv);
+      const episodesDiv = document.createElement('div');
+      episodesDiv.textContent = 'Episode(s): ' + seriesObj.episodes;
+      $series50.appendChild(episodesDiv);
 
-    const episodesDiv = document.createElement('div');
-    episodesDiv.textContent = 'Episode(s): ' + seriesObj.episodes;
-    $series50.appendChild(episodesDiv);
+      const butDiv = document.createElement('div');
+      butDiv.className = 'butDiv';
+      $series50.appendChild(butDiv);
 
-    const butDiv = document.createElement('div');
-    butDiv.className = 'butDiv';
-    $series50.appendChild(butDiv);
+      const moreInfoButtonSpan = document.createElement('span');
+      moreInfoButtonSpan.textContent = 'More Info';
+      moreInfoButtonSpan.className = 'moreInfoButton';
+      moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('medium', 'anime');
+      butDiv.appendChild(moreInfoButtonSpan);
 
-    const moreInfoButtonSpan = document.createElement('span');
-    moreInfoButtonSpan.textContent = 'More Info';
-    moreInfoButtonSpan.className = 'moreInfoButton';
-    moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
-    moreInfoButtonSpan.setAttribute('medium', 'anime');
-    butDiv.appendChild(moreInfoButtonSpan);
+      const iStar = document.createElement('i');
+      iStar.className = 'far fa-star';
+      const currentId = seriesObj.mal_id.toString();
 
-    const iStar = document.createElement('i');
-    iStar.className = 'far fa-star';
-    const currentId = seriesObj.mal_id.toString();
+      for (let b = 0; b < data.animeIDs.length; b++) {
+        const currentCheckAgainst = data.animeIDs[b];
 
-    for (let b = 0; b < data.animeIDs.length; b++) {
-      const currentCheckAgainst = data.animeIDs[b];
-
-      if (currentId === currentCheckAgainst) {
-        iStar.className = 'fas fa-star';
-        break;
+        if (currentId === currentCheckAgainst) {
+          iStar.className = 'fas fa-star';
+          break;
+        }
       }
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', yr);
+      iStar.setAttribute('episodes', seriesObj.episodes);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.image_url);
+
+      butDiv.appendChild(iStar);
+
+      $resultsList.appendChild($series50);
     }
-    iStar.setAttribute('title', seriesObj.title);
-    iStar.setAttribute('type', seriesObj.type);
-    iStar.setAttribute('year', yr);
-    iStar.setAttribute('episodes', seriesObj.episodes);
-    iStar.setAttribute('id', seriesObj.mal_id);
-    iStar.setAttribute('img', seriesObj.image_url);
-
-    butDiv.appendChild(iStar);
-
-    $resultsList.appendChild($series50);
   }
+
 }
 
 function xhrReqAnime() {
@@ -125,6 +133,12 @@ function xhrReqAnime() {
   xhr.addEventListener('load', function () {
     const searchResults = xhr.response.results;
     buildAnime(searchResults, 'term');
+  });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $resultsList.replaceChildren();
+    $resultsList.appendChild(networkErrorMessage);
   });
   xhr.send();
 }
@@ -146,79 +160,92 @@ function xhrReqAnimeFiltered() {
     }
     buildAnime(filteredResults, 'term');
   });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $resultsList.replaceChildren();
+    $resultsList.appendChild(networkErrorMessage);
+  });
   xhr.send();
 }
 
 function buildManga(searchResults) {
   $resultsList.replaceChildren();
-  for (let a = 0; a < searchResults.length; a++) {
-    let seriesObj = {};
-    seriesObj = searchResults[a];
-    const $series50 = document.createElement('div');
-    $series50.className = 'div series50';
+  if (searchResults === undefined || searchResults.length === 0) {
+    const noResults = document.createElement('h3');
+    noResults.textContent = 'Sorry, no results found for ' + searchTerm + ', try a different term.';
+    $resultsList.appendChild(noResults);
+  } else {
+    for (let a = 0; a < searchResults.length; a++) {
+      let seriesObj = {};
+      seriesObj = searchResults[a];
+      const $series50 = document.createElement('div');
+      $series50.className = 'div series50';
 
-    const showImage = document.createElement('img');
-    showImage.setAttribute('src', seriesObj.images.jpg.image_url);
-    $series50.appendChild(showImage);
+      const showImage = document.createElement('img');
+      showImage.setAttribute('src', seriesObj.images.jpg.image_url);
+      $series50.appendChild(showImage);
 
-    const titleDiv = document.createElement('div');
-    titleDiv.textContent = seriesObj.title;
-    $series50.appendChild(titleDiv);
+      const titleDiv = document.createElement('div');
+      titleDiv.textContent = seriesObj.title;
+      $series50.appendChild(titleDiv);
 
-    const typeDiv = document.createElement('div');
-    typeDiv.textContent = seriesObj.type;
-    $series50.appendChild(typeDiv);
+      const typeDiv = document.createElement('div');
+      typeDiv.textContent = seriesObj.type;
+      $series50.appendChild(typeDiv);
 
-    let yearPub;
-    const yearDiv = document.createElement('div');
-    if (seriesObj.published.from === null) {
-      yearDiv.textContent = 'Unknown date';
-    } else {
-      let yearString = String(seriesObj.published.from);
-      yearString = yearString.slice(0, 4);
-      yearDiv.textContent = yearString;
-      yearPub = yearString;
-    }
-    $series50.appendChild(yearDiv);
-
-    const chaptersDiv = document.createElement('div');
-    chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
-    $series50.appendChild(chaptersDiv);
-
-    const butDiv = document.createElement('div');
-    butDiv.className = 'butDiv';
-    $series50.appendChild(butDiv);
-
-    const moreInfoButtonSpan = document.createElement('span');
-    moreInfoButtonSpan.textContent = 'More Info';
-    moreInfoButtonSpan.className = 'moreInfoButton';
-    moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
-    moreInfoButtonSpan.setAttribute('medium', 'manga');
-    butDiv.appendChild(moreInfoButtonSpan);
-
-    const iStar = document.createElement('i');
-    iStar.className = 'far fa-star';
-    const currentId = seriesObj.mal_id.toString();
-
-    for (let b = 0; b < data.mangaIDs.length; b++) {
-      const currentCheckAgainst = data.mangaIDs[b];
-
-      if (currentId === currentCheckAgainst) {
-        iStar.className = 'fas fa-star';
-        break;
+      let yearPub;
+      const yearDiv = document.createElement('div');
+      if (seriesObj.published.from === null) {
+        yearDiv.textContent = 'Unknown date';
+      } else {
+        let yearString = String(seriesObj.published.from);
+        yearString = yearString.slice(0, 4);
+        yearDiv.textContent = yearString;
+        yearPub = yearString;
       }
+      $series50.appendChild(yearDiv);
+
+      const chaptersDiv = document.createElement('div');
+      chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
+      $series50.appendChild(chaptersDiv);
+
+      const butDiv = document.createElement('div');
+      butDiv.className = 'butDiv';
+      $series50.appendChild(butDiv);
+
+      const moreInfoButtonSpan = document.createElement('span');
+      moreInfoButtonSpan.textContent = 'More Info';
+      moreInfoButtonSpan.className = 'moreInfoButton';
+      moreInfoButtonSpan.setAttribute('id', seriesObj.mal_id);
+      moreInfoButtonSpan.setAttribute('medium', 'manga');
+      butDiv.appendChild(moreInfoButtonSpan);
+
+      const iStar = document.createElement('i');
+      iStar.className = 'far fa-star';
+      const currentId = seriesObj.mal_id.toString();
+
+      for (let b = 0; b < data.mangaIDs.length; b++) {
+        const currentCheckAgainst = data.mangaIDs[b];
+
+        if (currentId === currentCheckAgainst) {
+          iStar.className = 'fas fa-star';
+          break;
+        }
+      }
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', yearPub);
+      iStar.setAttribute('chapters', seriesObj.chapters);
+      iStar.setAttribute('id', seriesObj.mal_id);
+      iStar.setAttribute('img', seriesObj.images.jpg.image_url);
+
+      butDiv.appendChild(iStar);
+
+      $resultsList.appendChild($series50);
     }
-    iStar.setAttribute('title', seriesObj.title);
-    iStar.setAttribute('type', seriesObj.type);
-    iStar.setAttribute('year', yearPub);
-    iStar.setAttribute('chapters', seriesObj.chapters);
-    iStar.setAttribute('id', seriesObj.mal_id);
-    iStar.setAttribute('img', seriesObj.images.jpg.image_url);
-
-    butDiv.appendChild(iStar);
-
-    $resultsList.appendChild($series50);
   }
+
 }
 
 function xhrReqManga() {
@@ -229,6 +256,12 @@ function xhrReqManga() {
   xhr.addEventListener('load', function () {
     const searchResults = xhr.response.data;
     buildManga(searchResults);
+  });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $resultsList.replaceChildren();
+    $resultsList.appendChild(networkErrorMessage);
   });
   xhr.send();
 }
@@ -258,6 +291,12 @@ function xhrReqMangaFiltered() {
     }
     buildManga(filteredResults);
   });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $resultsList.replaceChildren();
+    $resultsList.appendChild(networkErrorMessage);
+  });
   xhr.send();
 }
 
@@ -269,6 +308,12 @@ function xhrReqSeason(year, seas) {
   xhr.addEventListener('load', function () {
     const searchResults = xhr.response.anime;
     buildAnime(searchResults, 'season');
+  });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $resultsList.replaceChildren();
+    $resultsList.appendChild(networkErrorMessage);
   });
   xhr.send();
 }
@@ -289,6 +334,12 @@ function xhrReqSeasonFiltered(year, seas) {
       }
     }
     buildAnime(filteredResults, 'season');
+  });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $resultsList.replaceChildren();
+    $resultsList.appendChild(networkErrorMessage);
   });
   xhr.send();
 }
@@ -555,7 +606,7 @@ $termSearch.addEventListener('submit', function (event) {
   loading.appendChild(loadingSpinner);
 
   const loadingMessage = document.createElement('h3');
-  loadingMessage.textContent = 'Please wait. Results are loading... (make sure search term has at least 3 characters)';
+  loadingMessage.textContent = 'Please wait. Results are loading...';
 
   loading.appendChild(loadingMessage);
 
@@ -616,7 +667,7 @@ $seasonSearch.addEventListener('submit', function (event) {
   event.preventDefault();
 
   if ($latestRadio.checked === true) {
-    season = '2021spring';
+    season = '2021summer';
   } else if ($previousRadio.checked === true) {
     const yr = $yearDropDown.value;
     const sea = $seasonDropDown.value;
