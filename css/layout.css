@@ -18,6 +18,11 @@
   justify-content: center;
 }
 
+.splashRow {
+  align-items: center;
+  justify-content: flex-start;
+}
+
 @media screen and (min-width: 524px) {
   .resultsList {
     justify-content: left;

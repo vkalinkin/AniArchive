@@ -25,6 +25,17 @@
   cursor: pointer;
 }
 
+.myListSplash {
+  text-align: center;
+  width: 80px;
+  cursor: pointer;
+}
+
+.splashInfo {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
 .exclude {
   min-width: 350px;
 }
@@ -33,6 +44,12 @@
   width: 80px;
   text-align: center;
   margin-left: 10px;
+  cursor: pointer;
+}
+
+.goSearchButSplash {
+  width: 80px;
+  text-align: center;
   cursor: pointer;
 }
 
