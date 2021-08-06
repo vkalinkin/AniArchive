@@ -471,6 +471,22 @@ function xhrReqIDAnime(id) {
     const currentAnime = xhr.response;
     buildModalAnime(currentAnime);
   });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    // $resultsList.replaceChildren();
+    $modalContent.appendChild(networkErrorMessage);
+
+    const modalBut = document.createElement('div');
+    modalBut.className = 'modalBut';
+
+    const modalOkButtonSpan = document.createElement('span');
+    modalOkButtonSpan.textContent = 'OK';
+    modalOkButtonSpan.className = 'modalOkButton';
+    modalBut.appendChild(modalOkButtonSpan);
+
+    $modalContent.appendChild(modalBut);
+  });
   xhr.send();
 }
 
@@ -588,6 +604,22 @@ function xhrReqIDManga(id) {
   xhr.addEventListener('load', function () {
     const currentManga = xhr.response;
     buildModalManga(currentManga);
+  });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    // $resultsList.replaceChildren();
+    $modalContent.appendChild(networkErrorMessage);
+
+    const modalBut = document.createElement('div');
+    modalBut.className = 'modalBut';
+
+    const modalOkButtonSpan = document.createElement('span');
+    modalOkButtonSpan.textContent = 'OK';
+    modalOkButtonSpan.className = 'modalOkButton';
+    modalBut.appendChild(modalOkButtonSpan);
+
+    $modalContent.appendChild(modalBut);
   });
   xhr.send();
 }
