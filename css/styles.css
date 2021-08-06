@@ -13,10 +13,17 @@
 
 .red {
   color: red;
+  margin: 5px;
+}
+
+.title {
+  margin-right: 30px;
 }
 
 .descrip {
   width: 300px;
+
+  /* margin-left: 30px; */
 }
 
 .myList {
@@ -38,6 +45,7 @@
 
 .exclude {
   min-width: 350px;
+  margin-bottom: 10px;
 }
 
 .goSearchBut {
@@ -54,7 +62,7 @@
 }
 
 .searchSelect {
-  max-width: 40%;
+  /* max-width: 40%; */
   justify-content: space-around;
   align-items: center;
 }
@@ -178,7 +186,7 @@ button {
 }
 
 .seasonLast {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   justify-content: flex-end;
 }
 

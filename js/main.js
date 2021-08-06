@@ -950,7 +950,7 @@ $myList.addEventListener('click', function (event) {
   //     iStar.setAttribute('type', seriesObj.type);
   //     iStar.setAttribute('year', seriesObj.year);
   //     iStar.setAttribute('episodes', seriesObj.episodes);
-  //     iStar.setAttribute('id', seriesObj.id);
+  //     iStar.setAtstribute('id', seriesObj.id);
   //     iStar.setAttribute('img', seriesObj.img);
   //   }
 

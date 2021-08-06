@@ -21,14 +21,24 @@
     <div class="container">
 
       <div class="splash">
-        <div class="teal">
+        <div class="row titleRow">
+          <span class="title teal">
+            <h1>AniArchive</h1>
+          </span>
+          <span class="descripAndList row">
+            <span>
+              <h4 class="descrip teal">ANIME AND MANGA DATABASE</h4>
+            </span>
+          </span>
+        </div>
+        <!-- <div class="teal">
           <h1>AniArchive</h1>
         </div>
         <div class="descripAndList row">
           <span>
             <h4 class="descrip teal">ANIME AND MANGA DATABASE</h4>
           </span>
-        </div>
+        </div> -->
 
         <div class="row splashRow">
           <span>
@@ -48,7 +58,25 @@
 
 
       <div class = "standardView hidden">
-        <div class="teal">
+        <div class="row titleRow">
+          <span class="title teal">
+            <h1>AniArchive</h1>
+          </span>
+          <span class="descripAndList row">
+            <span>
+              <h4 class="descrip teal">ANIME AND MANGA DATABASE</h4>
+            </span>
+          </span>
+          <span>
+            <h3 class="myList inactive">My List</h3>
+          </span>
+          <span>
+            <h3 class="goSearchBut active">Search</h3>
+          </span>
+        </div>
+
+
+        <!-- <div class="teal">
           <h1>AniArchive</h1>
         </div>
         <div class="descripAndList row">
@@ -62,30 +90,9 @@
           <span>
             <h3 class="goSearchBut active">Search</h3>
           </span>
-        </div>
+        </div> -->
 
         <div class="row searches">
-
-          <div class="row exclude">
-            <form>
-              <span>
-                <h3 class="red">Exclude NSFW results?:</h3>
-              </span>
-              <div class="row excludeRadios">
-                <span class="radioSpan">
-                  <input type="radio" name="filter" id="yesFilter" class="radio" checked>
-                  <label for="yesFilter" class="radioLabel">Yes</label>
-                </span>
-
-                <span class="radioSpan">
-                  <input type="radio" name="filter" class="radio" id="noFilter">
-                  <label for="noFilter" class="radioLabel">No</label>
-                </span>
-              </div>
-
-
-            </form>
-          </div>
 
           <div class="row searchSelect">
 
@@ -100,6 +107,10 @@
             </span>
 
           </div>
+
+
+
+
 
           <div class="row seasonSearch hidden">
             <form>
@@ -199,6 +210,15 @@
 
           <div class="row termSearch">
             <form>
+
+              <div class="row searchRow">
+                <label for="searchBox" class="labelSearch">Enter Your Search Term:</label>
+                <input type="text" id="searchBox">
+                <span>
+                  <button type="submit" class="submitButton">SEARCH</button>
+                </span>
+              </div>
+
               <div class="row mediumSelect">
                 <span>
                   <h3>Medium:</h3>
@@ -213,19 +233,32 @@
                   <label for="manga" class="radioLabel">Manga</label>
                 </span>
               </div>
+            </form>
+          </div>
 
 
-              <div class="row searchRow">
-                <label for="searchBox" class="labelSearch">Enter Your Search Term:</label>
-                <input type="text" id="searchBox">
-                <span>
-                  <button type="submit" class="submitButton">SEARCH</button>
+          <div class="row exclude">
+            <form>
+              <span>
+                <h3 class="red">Exclude NSFW results?:</h3>
+              </span>
+              <div class="row excludeRadios">
+                <span class="radioSpan">
+                  <input type="radio" name="filter" id="yesFilter" class="radio" checked>
+                  <label for="yesFilter" class="radioLabel">Yes</label>
+                </span>
+
+                <span class="radioSpan">
+                  <input type="radio" name="filter" class="radio" id="noFilter">
+                  <label for="noFilter" class="radioLabel">No</label>
                 </span>
               </div>
+
             </form>
           </div>
 
         </div>
+
         <div class="row resultsTitle teal">
         </div>
 
