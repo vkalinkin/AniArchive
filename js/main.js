@@ -32,6 +32,13 @@ const $radioNoFilter = document.querySelector('#noFilter');
 
 const $resultsTitle = document.querySelector('.resultsTitle');
 
+const $splash = document.querySelector('.splash');
+const $standardView = document.querySelector('.standardView');
+const $myListSplash = document.querySelector('.myListSplash');
+const $goSearchButSplash = document.querySelector('.goSearchButSplash');
+
+const $headerImage = document.querySelector('.headerImage');
+
 let searchTerm = '';
 
 let season = '2021summer';
@@ -466,6 +473,21 @@ function xhrReqIDAnime(id) {
     const currentAnime = xhr.response;
     buildModalAnime(currentAnime);
   });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    $modalContent.appendChild(networkErrorMessage);
+
+    const modalBut = document.createElement('div');
+    modalBut.className = 'modalBut';
+
+    const modalOkButtonSpan = document.createElement('span');
+    modalOkButtonSpan.textContent = 'OK';
+    modalOkButtonSpan.className = 'modalOkButton';
+    modalBut.appendChild(modalOkButtonSpan);
+
+    $modalContent.appendChild(modalBut);
+  });
   xhr.send();
 }
 
@@ -584,7 +606,108 @@ function xhrReqIDManga(id) {
     const currentManga = xhr.response;
     buildModalManga(currentManga);
   });
+  xhr.addEventListener('error', function () {
+    const networkErrorMessage = document.createElement('h3');
+    networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+    // $resultsList.replaceChildren();
+    $modalContent.appendChild(networkErrorMessage);
+
+    const modalBut = document.createElement('div');
+    modalBut.className = 'modalBut';
+
+    const modalOkButtonSpan = document.createElement('span');
+    modalOkButtonSpan.textContent = 'OK';
+    modalOkButtonSpan.className = 'modalOkButton';
+    modalBut.appendChild(modalOkButtonSpan);
+
+    $modalContent.appendChild(modalBut);
+  });
   xhr.send();
+}
+
+function generateFavorites() {
+  $searches.className = 'row searches hidden';
+  $resultsTitle.textContent = 'Current favorites in My List:';
+  $resultsList.replaceChildren();
+
+  for (let a = 0; a < data.faves.length; a++) {
+    let seriesObj = {};
+    seriesObj = data.faves[a];
+    const $series50 = document.createElement('div');
+    $series50.className = 'div series50';
+
+    const showImage = document.createElement('img');
+    showImage.setAttribute('src', seriesObj.img);
+    $series50.appendChild(showImage);
+
+    const titleDiv = document.createElement('div');
+    titleDiv.textContent = seriesObj.title;
+    $series50.appendChild(titleDiv);
+
+    const typeDiv = document.createElement('div');
+    typeDiv.textContent = seriesObj.type;
+    $series50.appendChild(typeDiv);
+
+    const yearDiv = document.createElement('div');
+    yearDiv.textContent = seriesObj.year;
+    $series50.appendChild(yearDiv);
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      const chaptersDiv = document.createElement('div');
+      chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
+      $series50.appendChild(chaptersDiv);
+    } else {
+      const episodesDiv = document.createElement('div');
+      episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
+      $series50.appendChild(episodesDiv);
+    }
+
+    const butDiv = document.createElement('div');
+    butDiv.className = 'butDiv';
+    $series50.appendChild(butDiv);
+
+    const moreInfoButtonSpan = document.createElement('span');
+    moreInfoButtonSpan.textContent = 'More Info';
+    moreInfoButtonSpan.className = 'moreInfoButton';
+    moreInfoButtonSpan.setAttribute('id', seriesObj.id);
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      moreInfoButtonSpan.setAttribute('medium', 'manga');
+    } else {
+      moreInfoButtonSpan.setAttribute('medium', 'anime');
+    }
+
+    butDiv.appendChild(moreInfoButtonSpan);
+
+    const iStar = document.createElement('i');
+    iStar.className = 'fas fa-star';
+
+    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
+      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', seriesObj.year);
+      iStar.setAttribute('chapters', seriesObj.chapters);
+      iStar.setAttribute('id', seriesObj.id);
+      iStar.setAttribute('img', seriesObj.img);
+    } else {
+      iStar.setAttribute('title', seriesObj.title);
+      iStar.setAttribute('type', seriesObj.type);
+      iStar.setAttribute('year', seriesObj.year);
+      iStar.setAttribute('episodes', seriesObj.episodes);
+      iStar.setAttribute('id', seriesObj.id);
+      iStar.setAttribute('img', seriesObj.img);
+    }
+
+    butDiv.appendChild(iStar);
+
+    $resultsList.appendChild($series50);
+
+    $myList.className = 'myList active';
+    $goSearchBut.className = 'goSearchBut inactive';
+  }
 }
 
 $termSearch.addEventListener('submit', function (event) {
@@ -609,7 +732,6 @@ $termSearch.addEventListener('submit', function (event) {
   loadingMessage.textContent = 'Please wait. Results are loading...';
 
   loading.appendChild(loadingMessage);
-
   $resultsList.appendChild(loading);
 
   searchTerm = $searchBox.value;
@@ -789,92 +911,24 @@ $modalContent.addEventListener('click', function (event) {
 });
 
 $myList.addEventListener('click', function (event) {
-  $searches.className = 'row searches hidden';
-  $resultsTitle.textContent = 'Current favorites in My List:';
-  $resultsList.replaceChildren();
-
-  for (let a = 0; a < data.faves.length; a++) {
-    let seriesObj = {};
-    seriesObj = data.faves[a];
-    const $series50 = document.createElement('div');
-    $series50.className = 'div series50';
-
-    const showImage = document.createElement('img');
-    showImage.setAttribute('src', seriesObj.img);
-    $series50.appendChild(showImage);
-
-    const titleDiv = document.createElement('div');
-    titleDiv.textContent = seriesObj.title;
-    $series50.appendChild(titleDiv);
-
-    const typeDiv = document.createElement('div');
-    typeDiv.textContent = seriesObj.type;
-    $series50.appendChild(typeDiv);
-
-    const yearDiv = document.createElement('div');
-    yearDiv.textContent = seriesObj.year;
-    $series50.appendChild(yearDiv);
-
-    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
-      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
-      const chaptersDiv = document.createElement('div');
-      chaptersDiv.textContent = 'Chapter(s): ' + seriesObj.chapters;
-      $series50.appendChild(chaptersDiv);
-    } else {
-      const episodesDiv = document.createElement('div');
-      episodesDiv.textContent = 'Episodes: ' + seriesObj.episodes;
-      $series50.appendChild(episodesDiv);
-    }
-
-    const butDiv = document.createElement('div');
-    butDiv.className = 'butDiv';
-    $series50.appendChild(butDiv);
-
-    const moreInfoButtonSpan = document.createElement('span');
-    moreInfoButtonSpan.textContent = 'More Info';
-    moreInfoButtonSpan.className = 'moreInfoButton';
-    moreInfoButtonSpan.setAttribute('id', seriesObj.id);
-
-    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
-      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
-      moreInfoButtonSpan.setAttribute('medium', 'manga');
-    } else {
-      moreInfoButtonSpan.setAttribute('medium', 'anime');
-    }
-
-    butDiv.appendChild(moreInfoButtonSpan);
-
-    const iStar = document.createElement('i');
-    iStar.className = 'fas fa-star';
-
-    if (seriesObj.type === 'Manga' || seriesObj.type === 'Light Novel' || seriesObj.type === 'One-shot' || seriesObj.type === 'Manhwa' ||
-      seriesObj.type === 'Manhua' || seriesObj.type === 'Doujinshi' || seriesObj.type === 'Novel') {
-      iStar.setAttribute('title', seriesObj.title);
-      iStar.setAttribute('type', seriesObj.type);
-      iStar.setAttribute('year', seriesObj.year);
-      iStar.setAttribute('chapters', seriesObj.chapters);
-      iStar.setAttribute('id', seriesObj.id);
-      iStar.setAttribute('img', seriesObj.img);
-    } else {
-      iStar.setAttribute('title', seriesObj.title);
-      iStar.setAttribute('type', seriesObj.type);
-      iStar.setAttribute('year', seriesObj.year);
-      iStar.setAttribute('episodes', seriesObj.episodes);
-      iStar.setAttribute('id', seriesObj.id);
-      iStar.setAttribute('img', seriesObj.img);
-    }
-
-    butDiv.appendChild(iStar);
-
-    $resultsList.appendChild($series50);
-
-    $myList.className = 'myList active';
-    $goSearchBut.className = 'goSearchBut inactive';
-  }
+  generateFavorites();
 });
 
 $goSearchBut.addEventListener('click', function (event) {
   $searches.className = 'row searches';
   $myList.className = 'myList inactive';
   $goSearchBut.className = 'goSearchBut active';
+});
+
+$myListSplash.addEventListener('click', function (event) {
+  $splash.className = 'splash hidden';
+  $headerImage.className = 'headerImage hidden';
+  $standardView.className = 'standardView';
+  generateFavorites();
+});
+
+$goSearchButSplash.addEventListener('click', function (event) {
+  $splash.className = 'splash hidden';
+  $headerImage.className = 'headerImage hidden';
+  $standardView.className = 'standardView';
 });
