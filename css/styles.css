@@ -7,6 +7,13 @@
   padding: 10px;
 }
 
+.headerImage {
+  background-image: url(../images/headerImage.jpg);
+  background-size: cover;
+  background-repeat: repeat-x;
+  min-height: 140px;
+}
+
 .teal {
   color: #319e77;
 }
@@ -20,10 +27,13 @@
   margin-right: 30px;
 }
 
+.titleSplash {
+  font-size: 45px;
+  font-weight: bolder;
+}
+
 .descrip {
   width: 300px;
-
-  /* margin-left: 30px; */
 }
 
 .myList {
@@ -33,8 +43,13 @@
 }
 
 .myListSplash {
+  font-size: 20px;
+  font-weight: bolder;
   text-align: center;
-  width: 80px;
+  width: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 42px;
   cursor: pointer;
 }
 
@@ -56,13 +71,17 @@
 }
 
 .goSearchButSplash {
-  width: 80px;
+  font-size: 20px;
+  font-weight: bolder;
   text-align: center;
+  width: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 42px;
   cursor: pointer;
 }
 
 .searchSelect {
-  /* max-width: 40%; */
   justify-content: space-around;
   align-items: center;
 }
