@@ -39,7 +39,8 @@
 .myList {
   font-size: 16px;
   font-weight: bolder;
-  text-align: center;
+
+  /* text-align: center; */
   width: 80px;
   cursor: pointer;
   margin-right: 10px;
@@ -48,7 +49,8 @@
 .myListSplash {
   font-size: 20px;
   font-weight: bolder;
-  text-align: center;
+
+  /* text-align: center; */
   width: 120px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -73,7 +75,8 @@
   cursor: pointer; */
   font-size: 16px;
   font-weight: bolder;
-  text-align: center;
+
+  /* text-align: center; */
   width: 80px;
   cursor: pointer;
 }
@@ -90,7 +93,7 @@
 }
 
 .searchSelect {
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
 }
 
@@ -184,7 +187,7 @@ label {
 }
 
 .searchRow {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 #searchBox {
