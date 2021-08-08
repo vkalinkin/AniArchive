@@ -31,8 +31,6 @@
 
 .splashRow {
   align-items: center;
-
-  /* justify-content: flex-start; */
   margin-bottom: 15px;
 }
 
@@ -81,8 +79,6 @@
   display: flex;
   justify-content: center;
   width: 120px;
-
-  /* text-align: center; */
 }
 
 .butDiv {
