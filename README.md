@@ -32,12 +32,12 @@ View a preview at: (https://github.com/vkalinkin/AniArchive/blob/master/gif/ania
 - Search for manga by release year
 - Search for manga/anime series by genre
 
-### System Requirements
+## System Requirements
 
 - Code Editor
 - Google Chrome
 
-### Getting Started
+## Getting Started
 
 1. Clone the repository.
 
