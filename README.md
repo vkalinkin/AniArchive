@@ -4,18 +4,18 @@ A web application for anime/manga fans who want to find information and discover
 
 This is an application build around the Jikan API, which pulls data from MyAnimeList. This project was built to improve my skills in web development and working with XMLHttpRequest. I also have an interest in the history of anime and manga, so it was interesting for me to see how the mediums have changed over the years.
 
-##Technologies Used
+## Technologies Used
 
 - HTML5
 - CSS3
 - Javascript (ES6)
 - XMLHttpRequest
 
-##Live Demo
+## Live Demo
 
 Try the live application at: (https://vkalinkin.github.io/AniArchive/)
 
-##Features
+## Features
 
 - User can find manga or anime series based on a search term.
 - User can search for anime series based on release season.
@@ -23,21 +23,21 @@ Try the live application at: (https://vkalinkin.github.io/AniArchive/)
 - User can save series to their own list that gets saved to the browser's local storage.
 - User can remove series from their list.
 
-##Preview
+## Preview
 
 View a preview at: (https://github.com/vkalinkin/AniArchive/blob/master/gif/aniarchive1.gif)
 
-##Stretch Features
+## Stretch Features
 
 - Search for manga by release year
 - Search for manga/anime series by genre
 
-###System Requirements
+### System Requirements
 
 - Code Editor
 - Google Chrome
 
-###Getting Started
+### Getting Started
 
 1. Clone the repository.
 
