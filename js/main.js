@@ -453,8 +453,7 @@ function buildModalAnime(currentAnime) {
 
   const modalBut = document.createElement('div');
   modalBut.className = 'modalBut';
-
-  const modalOkButtonSpan = document.createElement('span');
+  const modalOkButtonSpan = document.createElement('button');
   modalOkButtonSpan.textContent = 'OK';
   modalOkButtonSpan.className = 'modalOkButton';
   modalBut.appendChild(modalOkButtonSpan);
@@ -480,8 +479,7 @@ function xhrReqIDAnime(id) {
 
     const modalBut = document.createElement('div');
     modalBut.className = 'modalBut';
-
-    const modalOkButtonSpan = document.createElement('span');
+    const modalOkButtonSpan = document.createElement('button');
     modalOkButtonSpan.textContent = 'OK';
     modalOkButtonSpan.className = 'modalOkButton';
     modalBut.appendChild(modalOkButtonSpan);
@@ -588,8 +586,7 @@ function buildModalManga(currentManga) {
 
   const modalBut = document.createElement('div');
   modalBut.className = 'modalBut';
-
-  const modalOkButtonSpan = document.createElement('span');
+  const modalOkButtonSpan = document.createElement('button');
   modalOkButtonSpan.textContent = 'OK';
   modalOkButtonSpan.className = 'modalOkButton';
   modalBut.appendChild(modalOkButtonSpan);
@@ -609,13 +606,12 @@ function xhrReqIDManga(id) {
   xhr.addEventListener('error', function () {
     const networkErrorMessage = document.createElement('h3');
     networkErrorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
-    // $resultsList.replaceChildren();
     $modalContent.appendChild(networkErrorMessage);
 
     const modalBut = document.createElement('div');
     modalBut.className = 'modalBut';
 
-    const modalOkButtonSpan = document.createElement('span');
+    const modalOkButtonSpan = document.createElement('button');
     modalOkButtonSpan.textContent = 'OK';
     modalOkButtonSpan.className = 'modalOkButton';
     modalBut.appendChild(modalOkButtonSpan);
@@ -667,7 +663,7 @@ function generateFavorites() {
     butDiv.className = 'butDiv';
     $series50.appendChild(butDiv);
 
-    const moreInfoButtonSpan = document.createElement('span');
+    const moreInfoButtonSpan = document.createElement('button');
     moreInfoButtonSpan.textContent = 'More Info';
     moreInfoButtonSpan.className = 'moreInfoButton';
     moreInfoButtonSpan.setAttribute('id', seriesObj.id);
