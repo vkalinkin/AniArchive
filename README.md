@@ -25,7 +25,7 @@ Try the live application at: (https://vkalinkin.github.io/AniArchive/)
 
 ## Preview
 
-View a preview at: (https://github.com/vkalinkin/AniArchive/blob/master/gif/aniarchive1.gif)
+![Preview of search and fave feature](https://github.com/vkalinkin/AniArchive/blob/master/gif/aniarchive1.gif)
 
 ## Stretch Features
 
