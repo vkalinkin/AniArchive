@@ -41,7 +41,7 @@ const $headerImage = document.querySelector('.headerImage');
 
 let searchTerm = '';
 
-let season = '2021summer';
+let season = '2021fall';
 
 function buildAnime(searchResults, type) {
   $resultsList.replaceChildren();
@@ -785,7 +785,7 @@ $seasonSearch.addEventListener('submit', function (event) {
   event.preventDefault();
 
   if ($latestRadio.checked === true) {
-    season = '2021summer';
+    season = '2021fall';
   } else if ($previousRadio.checked === true) {
     const yr = $yearDropDown.value;
     const sea = $seasonDropDown.value;
