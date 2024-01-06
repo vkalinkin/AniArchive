@@ -57,7 +57,9 @@ function buildAnime(searchResults, type) {
       $series50.className = 'series50';
 
       const showImage = document.createElement('img');
-      showImage.setAttribute('src', seriesObj.image_url);
+      // showImage.setAttribute('src', seriesObj.image_url);
+      showImage.setAttribute('src', seriesObj.images.jpg.image_url);
+      // $series50.appendChild(showImage);
       $series50.appendChild(showImage);
 
       const titleDiv = document.createElement('div');
@@ -66,16 +68,19 @@ function buildAnime(searchResults, type) {
 
       const typeDiv = document.createElement('div');
       typeDiv.textContent = seriesObj.type;
+      
       $series50.appendChild(typeDiv);
 
       let yr;
       const yearDiv = document.createElement('div');
       if (type === 'term') {
-        if (seriesObj.start_date === null) {
+        // if (seriesObj.start_date === null) {
+        if (seriesObj.aired.from === null) {
           yearDiv.textContent = 'Unknown date';
           yr = null;
         } else {
-          let yearString = String(seriesObj.start_date);
+          // let yearString = String(seriesObj.start_date);
+          let yearString = String(seriesObj.aired.from);
           yearString = yearString.slice(0, 4);
           yearDiv.textContent = yearString;
           yr = yearString;
@@ -134,11 +139,13 @@ function buildAnime(searchResults, type) {
 
 function xhrReqAnime() {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+  //xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+  xhr.open('GET', "https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/anime?q=" + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    const searchResults = xhr.response.results;
+    // const searchResults = xhr.response.results;
+    const searchResults = xhr.response.data;
     buildAnime(searchResults, 'term');
   });
   xhr.addEventListener('error', function () {
@@ -152,7 +159,8 @@ function xhrReqAnime() {
 
 function xhrReqAnimeFiltered() {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+  //xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v3/search/anime?q=' + searchTerm);
+  xhr.open('GET', "https://lfz-cors.herokuapp.com/?url=https://api.jikan.moe/v4/anime?q=" + searchTerm);
   xhr.setRequestHeader('token', 'abc123');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
